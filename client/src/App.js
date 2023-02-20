@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Status from "./components/Status";
+import NavBar from "./components/NavBar";
+import Content from "./components/Content";
 
 // Componente principal de la aplicación.
 const App = () => {
@@ -16,13 +18,15 @@ const App = () => {
 
   // Mostramos la aplicación
   return (
-    <main>
-      <h1>Curso de React de TrainingIT</h1>
-      <p>
-        Estado del servidor:
-        {loading ? " Cargando..." : <Status status={status} />}
-      </p>
-    </main>
+    <div>
+      <NavBar />
+      <Content>
+        <p>
+          Estado del servidor:
+          {loading ? " Cargando..." : <Status status={status} />}
+        </p>
+      </Content>
+    </div>
   );
 };
 
