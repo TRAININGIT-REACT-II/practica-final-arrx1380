@@ -31,13 +31,14 @@ const NavBar = () => {
       variant={`${themeContext.current}`}
       bg={`${themeContext.current}`}
       expand="lg"
+      className="px-3"
     >
-      <Navbar.Brand className="px-3">TrainingNotes</Navbar.Brand>
+      <Navbar.Brand>TrainingNotes</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link className="px-2">Nueva tarjeta</Nav.Link>
-          <NavDropdown title="Vista" id="view-nav-dropdown" className="px-2">
+          <Nav.Link className="px-3">Nueva tarjeta</Nav.Link>
+          <NavDropdown title="Vista" id="view-nav-dropdown" className="px-3">
             <NavDropdown.Item onClick={() => setViewContext(VIEWS.list)}>
               <NavDropdownItem
                 item="Lista"
@@ -54,7 +55,7 @@ const NavBar = () => {
           <NavDropdown
             title="Ordernar por"
             id="sort-nav-dropdown"
-            className="px-2"
+            className="px-3"
           >
             <NavDropdown.Item onClick={() => setSortContext(SORTS.title)}>
               <NavDropdownItem
@@ -75,7 +76,7 @@ const NavBar = () => {
               />
             </NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown title="Tema" id="theme-nav-dropdown" className="px-2">
+          <NavDropdown title="Tema" id="theme-nav-dropdown" className="px-3">
             <NavDropdown.Item onClick={() => setThemeContext(THEMES.light)}>
               <NavDropdownItem
                 item="Claro"
