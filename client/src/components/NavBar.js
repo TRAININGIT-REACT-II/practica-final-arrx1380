@@ -27,13 +27,17 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar bg={`${themeContext.current}`} expand="lg">
-      <Navbar.Brand>TrainingNotes</Navbar.Brand>
+    <Navbar
+      variant={`${themeContext.current}`}
+      bg={`${themeContext.current}`}
+      expand="lg"
+    >
+      <Navbar.Brand className="px-3">TrainingNotes</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link>Nueva tarjeta</Nav.Link>
-          <NavDropdown title="Vista" id="view-nav-dropdown">
+          <Nav.Link className="px-2">Nueva tarjeta</Nav.Link>
+          <NavDropdown title="Vista" id="view-nav-dropdown" className="px-2">
             <NavDropdown.Item onClick={() => setViewContext(VIEWS.list)}>
               <NavDropdownItem
                 item="Lista"
@@ -47,7 +51,11 @@ const NavBar = () => {
               />
             </NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown title="Ordernar por" id="sort-nav-dropdown">
+          <NavDropdown
+            title="Ordernar por"
+            id="sort-nav-dropdown"
+            className="px-2"
+          >
             <NavDropdown.Item onClick={() => setSortContext(SORTS.title)}>
               <NavDropdownItem
                 item="Título"
@@ -67,7 +75,7 @@ const NavBar = () => {
               />
             </NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown title="Tema" id="theme-nav-dropdown">
+          <NavDropdown title="Tema" id="theme-nav-dropdown" className="px-2">
             <NavDropdown.Item onClick={() => setThemeContext(THEMES.light)}>
               <NavDropdownItem
                 item="Claro"
@@ -81,7 +89,7 @@ const NavBar = () => {
               />
             </NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link>Salir</Nav.Link>
+          <Nav.Link className="px-3">Salir</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
