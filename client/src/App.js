@@ -30,9 +30,9 @@ const App = () => {
 
   return (
     <ThemeContext.Provider value={{ current: theme, update: setTheme }}>
-      <NavBar />
       <ViewContext.Provider value={{ current: view, update: setView }}>
         <SortContext.Provider value={{ current: sort, update: setSort }}>
+          <NavBar />
           <Content view={ViewContext.current} sort={SortContext.current}>
             <p>
               Estado del servidor:
