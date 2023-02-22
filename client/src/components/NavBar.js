@@ -39,16 +39,16 @@ const NavBar = () => {
         <Nav className="me-auto">
           <Nav.Link className="px-3">Nueva tarjeta</Nav.Link>
           <NavDropdown title="Vista" id="view-nav-dropdown" className="px-3">
-            <NavDropdown.Item onClick={() => setViewContext(VIEWS.list)}>
-              <NavDropdownItem
-                item="Lista"
-                checked={viewContext.current === VIEWS.list}
-              />
-            </NavDropdown.Item>
             <NavDropdown.Item onClick={() => setViewContext(VIEWS.cards)}>
               <NavDropdownItem
                 item="Tarjetas"
                 checked={viewContext.current === VIEWS.cards}
+              />
+            </NavDropdown.Item>
+            <NavDropdown.Item onClick={() => setViewContext(VIEWS.list)}>
+              <NavDropdownItem
+                item="Lista"
+                checked={viewContext.current === VIEWS.list}
               />
             </NavDropdown.Item>
           </NavDropdown>

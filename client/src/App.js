@@ -15,7 +15,7 @@ const App = () => {
   // Statuses
   const [status, setStatus] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [view, setView] = useState(VIEWS.list);
+  const [view, setView] = useState(VIEWS.cards);
   const [sort, setSort] = useState(SORTS.title);
   const [theme, setTheme] = useState(THEMES.light);
 
