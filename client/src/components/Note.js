@@ -6,6 +6,7 @@ import { VIEWS } from "../constants/views";
 import Card from "react-bootstrap/Card";
 
 const Note = ({ note }) => {
+  // Contexts
   const themeContext = useContext(ThemeContext);
   const viewContext = useContext(ViewContext);
 

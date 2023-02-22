@@ -4,7 +4,6 @@ import ViewContext from "../contexts/view";
 import SortContext from "../contexts/sort";
 import { THEMES } from "../constants/themes";
 import { VIEWS } from "../constants/views";
-import { SORTS } from "../constants/sorts";
 import Note from "./Note";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -18,21 +17,53 @@ const Notes = ({ notes }) => {
       {viewContext.current === VIEWS.list ? (
         <>
           <Row
-            className={`px-3 pt-3 ${
+            className={`m-0 ${
               themeContext.current === THEMES.dark ? "text-white" : null
             }`}
           >
             <Col xs={2}>
-              <h5>Título</h5>
+              <h6
+                className={
+                  themeContext.current === THEMES.light
+                    ? "text-black-50"
+                    : "text-white-50"
+                }
+              >
+                Título
+              </h6>
             </Col>
             <Col xs={6}>
-              <h5>Nota</h5>
+              <h6
+                className={
+                  themeContext.current === THEMES.light
+                    ? "text-black-50"
+                    : "text-white-50"
+                }
+              >
+                Nota
+              </h6>
             </Col>
             <Col xs={2}>
-              <h5>Creada</h5>
+              <h6
+                className={
+                  themeContext.current === THEMES.light
+                    ? "text-black-50"
+                    : "text-white-50"
+                }
+              >
+                Creada
+              </h6>
             </Col>
             <Col xs={2}>
-              <h5>Modificada</h5>
+              <h6
+                className={
+                  themeContext.current === THEMES.light
+                    ? "text-black-50"
+                    : "text-white-50"
+                }
+              >
+                Modificada
+              </h6>
             </Col>
           </Row>
           {notes
@@ -42,7 +73,7 @@ const Notes = ({ notes }) => {
             .map((item, key) => (
               <Row
                 key={key}
-                className={`px-3 py-2 ${
+                className={`m-0 ${
                   themeContext.current === THEMES.dark ? "text-white" : null
                 }`}
               >
@@ -50,24 +81,10 @@ const Notes = ({ notes }) => {
                   <b>{item.title}</b>
                 </Col>
                 <Col xs={6}>{item.note}</Col>
-                <Col
-                  xs={2}
-                  className={
-                    themeContext.current === THEMES.light
-                      ? "text-black-50"
-                      : "text-white-50"
-                  }
-                >
+                <Col xs={2}>
                   <small>{item.created}</small>
                 </Col>
-                <Col
-                  xs={2}
-                  className={
-                    themeContext.current === THEMES.light
-                      ? "text-black-50"
-                      : "text-white-50"
-                  }
-                >
+                <Col xs={2}>
                   <small>{item.updated}</small>
                 </Col>
               </Row>
@@ -75,7 +92,7 @@ const Notes = ({ notes }) => {
         </>
       ) : (
         <Row
-          className={`p-3 ${
+          className={`m-0 ${
             themeContext.current === THEMES.dark ? "note-dark" : null
           }`}
         >
