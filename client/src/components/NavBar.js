@@ -16,6 +16,7 @@ const NavBar = () => {
   const sortContext = useContext(SortContext);
   const themeContext = useContext(ThemeContext);
 
+  // Setters
   const setViewContext = (ctx) => {
     viewContext.update(ctx);
   };

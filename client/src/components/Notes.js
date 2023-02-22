@@ -9,9 +9,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 const Notes = ({ notes }) => {
+  // Contexts
   const themeContext = useContext(ThemeContext);
   const viewContext = useContext(ViewContext);
   const sortContext = useContext(SortContext);
+
   return (
     <>
       {viewContext.current === VIEWS.list ? (
