@@ -73,8 +73,10 @@ const Notes = ({ notes }) => {
             .map((item, key) => (
               <Row
                 key={key}
-                className={`m-0 ${
-                  themeContext.current === THEMES.dark ? "text-white" : null
+                className={`m-0 py-1 border-top ${
+                  themeContext.current === THEMES.dark
+                    ? "text-white border-light border-opacity-25"
+                    : null
                 }`}
               >
                 <Col xs={2}>
