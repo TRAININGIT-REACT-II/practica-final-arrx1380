@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -35,11 +35,17 @@ const NavBar = () => {
       expand="lg"
       className="px-3"
     >
-      <Navbar.Brand>TrainingNotes</Navbar.Brand>
+      <Navbar.Brand>
+        <Nav.Link className="px-3" href="/">
+          TrainingNotes
+        </Nav.Link>
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link className="px-3">Nueva tarjeta</Nav.Link>
+          <Nav.Link className="px-3" href="/note/new">
+            Nueva tarjeta
+          </Nav.Link>
           <NavDropdown title="Vista" id="view-nav-dropdown" className="px-3">
             <NavDropdown.Item onClick={() => setViewContext(VIEWS.cards)}>
               <NavDropdownItem
@@ -92,7 +98,9 @@ const NavBar = () => {
               />
             </NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link className="px-3">Salir</Nav.Link>
+          <Nav.Link className="px-3" href="/logout">
+            Salir
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
