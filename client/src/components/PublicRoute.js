@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import UserContext from "../contexts/user";
 
-const PrivateRoute = ({ children, ...others }) => {
+const PublicRoute = ({ children, ...others }) => {
   // Contexts
   const { isLogged } = useContext(UserContext);
 
@@ -10,13 +10,13 @@ const PrivateRoute = ({ children, ...others }) => {
     <Route
       {...others}
       render={() =>
-        isLogged ? (
+        !isLogged ? (
           children
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
-              state: { code: "401", description: "Unauthorized" },
+              pathname: "/",
+              state: { code: "101", description: "Already logged" },
             }}
           />
         )
@@ -25,4 +25,4 @@ const PrivateRoute = ({ children, ...others }) => {
   );
 };
 
-export default PrivateRoute;
+export default PublicRoute;

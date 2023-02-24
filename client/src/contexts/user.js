@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 const User = createContext({
-  logged: true,
+  isLogged: true,
   update: () => {},
 });
 

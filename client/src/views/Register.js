@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-const Login = () => {
+const Register = () => {
   // States
   const [formState, setFormState] = useState({ username: "", password: "" });
 
@@ -52,15 +52,15 @@ const Login = () => {
             onChange={onChange("password")}
           />
         </Form.Group>
-        <Button type="submit" variant="dark" className="mt-2">
-          Acceder
+        <Button type="submit" variant="primary" className="mt-2">
+          Regístrate
         </Button>
         <Form.Group className="mt-4">
-          ¿No estás registrado? <Link to="/register">Regístrate aquí</Link>
+          ¿Ya estás registrado? <Link to="/login">Accede aquí</Link>
         </Form.Group>
       </Form>
     </div>
   );
 };
 
-export default Login;
+export default Register;
