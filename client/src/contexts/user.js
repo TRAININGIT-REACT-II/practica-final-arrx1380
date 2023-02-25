@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 const User = createContext({
-  isLogged: true,
+  isLogged: localStorage.getItem("logged") == "true" ? true : false,
   update: () => {},
 });
 

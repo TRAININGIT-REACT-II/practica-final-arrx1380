@@ -27,6 +27,7 @@ const Login = () => {
     // TODO
     console.log(formState);
     userContext.update(true);
+    localStorage.setItem("logged", true);
     history.push("/");
   };
 

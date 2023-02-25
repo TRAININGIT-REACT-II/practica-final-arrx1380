@@ -19,12 +19,15 @@ const NavBar = () => {
   // Setters
   const setViewContext = (ctx) => {
     viewContext.update(ctx);
+    localStorage.setItem("view", ctx);
   };
   const setSortContext = (ctx) => {
     sortContext.update(ctx);
+    localStorage.setItem("sort", ctx);
   };
   const setThemeContext = (ctx) => {
     themeContext.update(ctx);
+    localStorage.setItem("theme", ctx);
   };
 
   return (

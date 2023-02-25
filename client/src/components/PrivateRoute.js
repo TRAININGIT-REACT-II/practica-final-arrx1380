@@ -10,7 +10,7 @@ const PrivateRoute = ({ children, ...others }) => {
     <Route
       {...others}
       render={() =>
-        isLogged ? (
+        isLogged === true ? (
           children
         ) : (
           <Redirect

@@ -10,7 +10,7 @@ const PublicRoute = ({ children, ...others }) => {
     <Route
       {...others}
       render={() =>
-        !isLogged ? (
+        isLogged === false ? (
           children
         ) : (
           <Redirect

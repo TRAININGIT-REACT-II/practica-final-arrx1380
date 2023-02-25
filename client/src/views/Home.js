@@ -52,9 +52,11 @@ const Home = () => {
   // Statuses
   const [status, setStatus] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [view, setView] = useState(VIEWS.cards);
-  const [sort, setSort] = useState(SORTS.title);
-  const [theme, setTheme] = useState(THEMES.light);
+  const [view, setView] = useState(localStorage.getItem("view") ?? VIEWS.cards);
+  const [sort, setSort] = useState(localStorage.getItem("sort") ?? SORTS.title);
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ?? THEMES.light
+  );
 
   // Effects
   useEffect(() => {

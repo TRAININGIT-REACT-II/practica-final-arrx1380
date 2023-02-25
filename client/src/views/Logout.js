@@ -10,10 +10,11 @@ const Logout = () => {
   const history = useHistory();
 
   // TODO
-  userContext.update(true);
+  userContext.update(false);
+  localStorage.setItem("logged", false);
   history.push("/login");
 
-  return null;
+  return <></>;
 };
 
 export default Logout;

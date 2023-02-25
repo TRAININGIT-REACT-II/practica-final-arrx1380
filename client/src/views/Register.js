@@ -27,6 +27,7 @@ const Register = () => {
     // TODO
     console.log(formState);
     userContext.update(true);
+    localStorage.setItem("logged", true);
     history.push("/");
   };
 
@@ -52,7 +53,7 @@ const Register = () => {
             onChange={onChange("password")}
           />
         </Form.Group>
-        <Button type="submit" variant="primary" className="mt-2">
+        <Button type="submit" variant="dark" className="mt-2">
           Regístrate
         </Button>
         <Form.Group className="mt-4">

@@ -13,7 +13,9 @@ import Note from "./views/Note";
 // Main APP
 const App = () => {
   // Statuses
-  const [userLogged, setUserLogged] = useState(true);
+  const [userLogged, setUserLogged] = useState(
+    localStorage.getItem("logged") == "true" ? true : false
+  );
 
   return (
     <UserContext.Provider
