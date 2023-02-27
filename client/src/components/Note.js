@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import ThemeContext from "../contexts/theme";
 import { THEMES } from "../constants/themes";
 import Card from "react-bootstrap/Card";
@@ -44,11 +45,26 @@ const Note = ({ note }) => {
       </Card.Body>
       <Card.Footer className="text-muted">
         <div className="d-flex bd-highlight">
-          <Button variant="secondary" size="sm">
+          <Button
+            variant={
+              themeContext.current === THEMES.light ? THEMES.dark : THEMES.light
+            }
+            size="sm"
+            as={Link}
+            to={`/note/view/${note.id}`}
+          >
             Ver
           </Button>
-          <Button variant="secondary" size="sm" className="mx-1">
-            Modificar
+          <Button
+            variant={
+              themeContext.current === THEMES.light ? THEMES.dark : THEMES.light
+            }
+            size="sm"
+            className="mx-1"
+            as={Link}
+            to={`/note/update/${note.id}`}
+          >
+            Editar
           </Button>
           <Button variant="danger" size="sm">
             Borrar

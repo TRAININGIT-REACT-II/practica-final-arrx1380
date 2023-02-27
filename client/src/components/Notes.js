@@ -96,7 +96,7 @@ const Notes = ({ notes }) => {
                     Ver
                   </Button>
                   <Button variant="secondary" size="sm" className="mx-1">
-                    Modificar
+                    Editar
                   </Button>
                   <Button variant="danger" size="sm">
                     Borrar

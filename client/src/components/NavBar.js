@@ -1,18 +1,18 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import ViewContext from "../contexts/view";
 import SortContext from "../contexts/sort";
 import ThemeContext from "../contexts/theme";
-import NavDropdownItem from "./NavDropdownItem";
 import { VIEWS } from "../constants/views";
 import { SORTS } from "../constants/sorts";
 import { THEMES } from "../constants/themes";
 import { JournalBookmark } from "react-bootstrap-icons";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import NavDropdownItem from "./NavDropdownItem";
 
-const NavBar = () => {
+const NavBar = ({ home = true }) => {
   // Contexts
   const viewContext = useContext(ViewContext);
   const sortContext = useContext(SortContext);
@@ -44,47 +44,60 @@ const NavBar = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link className="px-3" as={Link} to="/note/new">
-            Nueva tarjeta
-          </Nav.Link>
-          <NavDropdown title="Vista" id="view-nav-dropdown" className="px-3">
-            <NavDropdown.Item onClick={() => setViewContext(VIEWS.cards)}>
-              <NavDropdownItem
-                item="Tarjetas"
-                checked={viewContext.current === VIEWS.cards}
-              />
-            </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => setViewContext(VIEWS.list)}>
-              <NavDropdownItem
-                item="Lista"
-                checked={viewContext.current === VIEWS.list}
-              />
-            </NavDropdown.Item>
-          </NavDropdown>
-          <NavDropdown
-            title="Ordernar por"
-            id="sort-nav-dropdown"
-            className="px-3"
-          >
-            <NavDropdown.Item onClick={() => setSortContext(SORTS.title)}>
-              <NavDropdownItem
-                item="Título"
-                checked={sortContext.current === SORTS.title}
-              />
-            </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => setSortContext(SORTS.created)}>
-              <NavDropdownItem
-                item="Fecha de creación"
-                checked={sortContext.current === SORTS.created}
-              />
-            </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => setSortContext(SORTS.updated)}>
-              <NavDropdownItem
-                item="Fecha de actualización"
-                checked={sortContext.current === SORTS.updated}
-              />
-            </NavDropdown.Item>
-          </NavDropdown>
+          {home ? (
+            <Nav.Link className="px-3" as={Link} to="/note/create">
+              Añadir nota
+            </Nav.Link>
+          ) : null}
+        </Nav>
+        <Nav>
+          {home ? (
+            <>
+              <NavDropdown
+                title="Vista"
+                id="view-nav-dropdown"
+                className="px-3"
+              >
+                <NavDropdown.Item onClick={() => setViewContext(VIEWS.cards)}>
+                  <NavDropdownItem
+                    item="Tarjetas"
+                    checked={viewContext.current === VIEWS.cards}
+                  />
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => setViewContext(VIEWS.list)}>
+                  <NavDropdownItem
+                    item="Lista"
+                    checked={viewContext.current === VIEWS.list}
+                  />
+                </NavDropdown.Item>
+              </NavDropdown>
+              <NavDropdown
+                title="Ordernar por"
+                id="sort-nav-dropdown"
+                className="px-3"
+              >
+                <NavDropdown.Item onClick={() => setSortContext(SORTS.title)}>
+                  <NavDropdownItem
+                    item="Título"
+                    checked={sortContext.current === SORTS.title}
+                  />
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => setSortContext(SORTS.created)}>
+                  <NavDropdownItem
+                    item="Fecha de creación"
+                    checked={sortContext.current === SORTS.created}
+                  />
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => setSortContext(SORTS.updated)}>
+                  <NavDropdownItem
+                    item="Fecha de actualización"
+                    checked={sortContext.current === SORTS.updated}
+                  />
+                </NavDropdown.Item>
+              </NavDropdown>
+            </>
+          ) : null}
+
           <NavDropdown title="Tema" id="theme-nav-dropdown" className="px-3">
             <NavDropdown.Item onClick={() => setThemeContext(THEMES.light)}>
               <NavDropdownItem
@@ -99,11 +112,16 @@ const NavBar = () => {
               />
             </NavDropdown.Item>
           </NavDropdown>
-        </Nav>
-        <Nav>
-          <Nav.Link className="px-3" as={Link} to="/logout">
-            Salir
-          </Nav.Link>
+
+          {home ? (
+            <Nav.Link className="px-3" as={Link} to="/logout">
+              Salir
+            </Nav.Link>
+          ) : (
+            <Nav.Link className="px-3" as={Link} to="/">
+              Volver
+            </Nav.Link>
+          )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
