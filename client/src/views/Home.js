@@ -2,12 +2,6 @@ import { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import Content from "../components/Content";
 import NotesContent from "../components/NotesContent";
-import ViewContext from "../contexts/view";
-import SortContext from "../contexts/sort";
-import ThemeContext from "../contexts/theme";
-import { VIEWS } from "../constants/views";
-import { SORTS } from "../constants/sorts";
-import { THEMES } from "../constants/themes";
 import ErrorBoundary from "../components/ErrorBoundary";
 
 const notes = [
@@ -52,11 +46,6 @@ const Home = () => {
   // Statuses
   const [status, setStatus] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [view, setView] = useState(localStorage.getItem("view") ?? VIEWS.cards);
-  const [sort, setSort] = useState(localStorage.getItem("sort") ?? SORTS.title);
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ?? THEMES.light
-  );
 
   // Effects
   useEffect(() => {
@@ -66,18 +55,12 @@ const Home = () => {
       .finally(() => setLoading(false));
   }, []);
   return (
-    <ThemeContext.Provider value={{ current: theme, update: setTheme }}>
-      <ViewContext.Provider value={{ current: view, update: setView }}>
-        <SortContext.Provider value={{ current: sort, update: setSort }}>
-          <Content>
-            <NavBar />
-            <ErrorBoundary message="Ha ocurrido un error obteniendo los datos del servidor">
-              <NotesContent status={status} loading={loading} notes={notes} />
-            </ErrorBoundary>
-          </Content>
-        </SortContext.Provider>
-      </ViewContext.Provider>
-    </ThemeContext.Provider>
+    <Content>
+      <NavBar />
+      <ErrorBoundary message="Ha ocurrido un error obteniendo los datos del servidor">
+        <NotesContent status={status} loading={loading} notes={notes} />
+      </ErrorBoundary>
+    </Content>
   );
 };
 

@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -19,15 +20,12 @@ const NavBar = () => {
   // Setters
   const setViewContext = (ctx) => {
     viewContext.update(ctx);
-    localStorage.setItem("view", ctx);
   };
   const setSortContext = (ctx) => {
     sortContext.update(ctx);
-    localStorage.setItem("sort", ctx);
   };
   const setThemeContext = (ctx) => {
     themeContext.update(ctx);
-    localStorage.setItem("theme", ctx);
   };
 
   return (
@@ -38,14 +36,14 @@ const NavBar = () => {
       className="px-3"
     >
       <Navbar.Brand>
-        <Nav.Link className="px-3" href="/">
+        <Nav.Link className="px-3" as={Link} to="/">
           TrainingNotes
         </Nav.Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link className="px-3" href="/note/new">
+          <Nav.Link className="px-3" as={Link} to="/note/new">
             Nueva tarjeta
           </Nav.Link>
           <NavDropdown title="Vista" id="view-nav-dropdown" className="px-3">
@@ -100,7 +98,7 @@ const NavBar = () => {
               />
             </NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link className="px-3" href="/logout">
+          <Nav.Link className="px-3" as={Link} to="/logout">
             Salir
           </Nav.Link>
         </Nav>
