@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import UserContext from "../contexts/user";
 import { useHistory } from "react-router";
 
@@ -9,10 +9,13 @@ const Logout = () => {
   // History
   const history = useHistory();
 
-  // TODO
-  userContext.update(false);
-  localStorage.setItem("logged", false);
-  history.push("/login");
+  // Effects
+  useEffect(() => {
+    // TODO
+    localStorage.setItem("logged", false);
+    userContext.update(false);
+    history.push("/login");
+  }, []);
 
   return <></>;
 };

@@ -98,6 +98,8 @@ const NavBar = () => {
               />
             </NavDropdown.Item>
           </NavDropdown>
+        </Nav>
+        <Nav>
           <Nav.Link className="px-3" as={Link} to="/logout">
             Salir
           </Nav.Link>
