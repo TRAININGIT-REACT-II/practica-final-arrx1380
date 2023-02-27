@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { JournalBookmark } from "react-bootstrap-icons";
 
 const Register = () => {
   // States
@@ -32,9 +33,11 @@ const Register = () => {
   };
 
   return (
-    <div className="m-4">
-      <span className="fs-1">TrainingNotes</span>
+    <div className="w-100 d-flex justify-content-center mt-4">
       <Form className="mt-4" onSubmit={onSubmit}>
+        <div className="fs-1 mb-5">
+          <JournalBookmark /> TrainingNotes
+        </div>
         <Form.Group className="mb-3" controlId="formUser">
           <Form.Label>Usuario</Form.Label>
           <Form.Control
@@ -56,7 +59,7 @@ const Register = () => {
         <Button type="submit" variant="dark" className="mt-2">
           Regístrate
         </Button>
-        <Form.Group className="mt-4">
+        <Form.Group className="mt-5">
           ¿Ya estás registrado? <Link to="/login">Accede aquí</Link>
         </Form.Group>
       </Form>

@@ -7,6 +7,7 @@ import { VIEWS } from "../constants/views";
 import Note from "./Note";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 const Notes = ({ notes }) => {
   // Contexts
@@ -23,17 +24,6 @@ const Notes = ({ notes }) => {
               themeContext.current === THEMES.dark ? "text-white" : null
             }`}
           >
-            <Col xs={2}>
-              <h6
-                className={
-                  themeContext.current === THEMES.light
-                    ? "text-black-50"
-                    : "text-white-50"
-                }
-              >
-                Título
-              </h6>
-            </Col>
             <Col xs={6}>
               <h6
                 className={
@@ -42,7 +32,7 @@ const Notes = ({ notes }) => {
                     : "text-white-50"
                 }
               >
-                Nota
+                Título
               </h6>
             </Col>
             <Col xs={2}>
@@ -67,6 +57,17 @@ const Notes = ({ notes }) => {
                 Modificada
               </h6>
             </Col>
+            <Col xs={2}>
+              <h6
+                className={
+                  themeContext.current === THEMES.light
+                    ? "text-black-50"
+                    : "text-white-50"
+                }
+              >
+                Acciones
+              </h6>
+            </Col>
           </Row>
           {notes
             .sort((a, b) =>
@@ -75,21 +76,31 @@ const Notes = ({ notes }) => {
             .map((item, key) => (
               <Row
                 key={key}
-                className={`m-0 py-1 border-top ${
+                className={`m-0 py-2 border-top ${
                   themeContext.current === THEMES.dark
                     ? "text-white border-light border-opacity-25"
                     : null
                 }`}
               >
-                <Col xs={2}>
+                <Col xs={6} className="pt-1">
                   <b>{item.title}</b>
                 </Col>
-                <Col xs={6}>{item.note}</Col>
-                <Col xs={2}>
+                <Col xs={2} className="pt-1">
                   <small>{item.created}</small>
                 </Col>
-                <Col xs={2}>
+                <Col xs={2} className="pt-1">
                   <small>{item.updated}</small>
+                </Col>
+                <Col xs={2}>
+                  <Button variant="secondary" size="sm">
+                    Ver
+                  </Button>
+                  <Button variant="secondary" size="sm" className="mx-1">
+                    Modificar
+                  </Button>
+                  <Button variant="danger" size="sm">
+                    Borrar
+                  </Button>
                 </Col>
               </Row>
             ))}

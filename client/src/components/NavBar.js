@@ -10,6 +10,7 @@ import NavDropdownItem from "./NavDropdownItem";
 import { VIEWS } from "../constants/views";
 import { SORTS } from "../constants/sorts";
 import { THEMES } from "../constants/themes";
+import { JournalBookmark } from "react-bootstrap-icons";
 
 const NavBar = () => {
   // Contexts
@@ -37,7 +38,7 @@ const NavBar = () => {
     >
       <Navbar.Brand>
         <Nav.Link className="px-3" as={Link} to="/">
-          TrainingNotes
+          <JournalBookmark /> TrainingNotes
         </Nav.Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
