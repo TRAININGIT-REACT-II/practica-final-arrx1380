@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useContext } from "react";
+import { useParams } from "react-router-dom";
+import useNotes from "../../hooks/useNotes";
 import ThemeContext from "../../contexts/theme";
 import { THEMES } from "../../constants/themes";
 import Content from "../../components/Content";
@@ -8,11 +10,28 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 const UpdateNote = () => {
-  // States
-  const [formState, setFormState] = useState({ title: "", note: "" });
+  // Params
+  const params = useParams();
 
   // Contexts
   const themeContext = useContext(ThemeContext);
+
+  // Hooks
+  const { viewNote } = useNotes();
+  const note = viewNote(params.id);
+
+  // States
+  const [formState, setFormState] = useState({
+    title: "",
+    note: "",
+  });
+
+  // Effects
+  useEffect(() => {
+    if (typeof note != "undefined") {
+      setFormState({ title: note?.title, note: note?.note });
+    }
+  }, [note]);
 
   const onChange = (key) => (e) => {
     setFormState({
@@ -42,7 +61,7 @@ const UpdateNote = () => {
             <Form.Control
               type="text"
               placeholder="Título"
-              value={formState.title}
+              value={formState?.title}
               onChange={onChange("title")}
               className={
                 themeContext.current === THEMES.dark
@@ -57,7 +76,7 @@ const UpdateNote = () => {
               as="textarea"
               rows={5}
               placeholder="Nota"
-              value={formState.note}
+              value={formState?.note}
               onChange={onChange("note")}
               className={
                 themeContext.current === THEMES.dark

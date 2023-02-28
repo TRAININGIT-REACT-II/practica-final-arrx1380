@@ -1,4 +1,6 @@
 import { useContext } from "react";
+import { useParams } from "react-router-dom";
+import useNotes from "../../hooks/useNotes";
 import ThemeContext from "../../contexts/theme";
 import { THEMES } from "../../constants/themes";
 import Content from "../../components/Content";
@@ -7,8 +9,15 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 const ViewNote = () => {
+  // Params
+  const params = useParams();
+
   // Contexts
   const themeContext = useContext(ThemeContext);
+
+  // Hooks
+  const { viewNote } = useNotes();
+  const note = viewNote(params.id);
 
   return (
     <Content>
@@ -37,7 +46,7 @@ const ViewNote = () => {
           </Col>
         </Row>
         <Row className="mt-2">
-          <Col>aosidha odhaosid haosihdoasi hdoiahd o</Col>
+          <Col>{note?.title}</Col>
         </Row>
         <Row className="mt-4">
           <Col>
@@ -55,10 +64,7 @@ const ViewNote = () => {
           </Col>
         </Row>
         <Row className="mt-2">
-          <Col>
-            aosidha odhaosid haosihqwjeoq wjeoiq weojqw oejqowie jqowije ioqwjei
-            qweoiwj qoeij qwoiejoqwijeoqjeoqdoasi hdoiahd o
-          </Col>
+          <Col>{note?.note}</Col>
         </Row>
         <Row className="mt-4">
           <Col>
@@ -76,7 +82,7 @@ const ViewNote = () => {
           </Col>
         </Row>
         <Row className="mt-2">
-          <Col>2022-04-54 12:33:44</Col>
+          <Col>{note?.created}</Col>
         </Row>
         <Row className="mt-4">
           <Col>
@@ -94,7 +100,7 @@ const ViewNote = () => {
           </Col>
         </Row>
         <Row className="mt-2">
-          <Col>2022-04-54 12:33:44</Col>
+          <Col>{note?.updated}</Col>
         </Row>
       </div>
     </Content>

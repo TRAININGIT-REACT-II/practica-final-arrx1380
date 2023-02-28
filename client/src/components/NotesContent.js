@@ -1,20 +1,21 @@
 import Notes from "../components/Notes";
-import withLoader from "./WithLoader";
+import useNotes from "../hooks/useNotes";
 
-const NotesContent = ({ loading, status, notes }) => {
-  if (!loading && !status) {
-    throw new Error("Error retrieving data from server");
-  }
+const NotesContent = () => {
+  //Hooks
+  const notes = useNotes();
 
   return (
-    <div className="p-2 pt-4">
-      {notes.length ? (
-        <Notes notes={notes} />
+    <>
+      {notes.notes.length ? (
+        <div className="p-2 pt-4">
+          <Notes notes={notes.notes} />
+        </div>
       ) : (
-        <div className="p-3 text-black-50">No hay notas</div>
+        <div className="p-4 text-black-50">No hay notas</div>
       )}
-    </div>
+    </>
   );
 };
 
-export default withLoader(NotesContent);
+export default NotesContent;

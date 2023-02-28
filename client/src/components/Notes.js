@@ -1,4 +1,6 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
+import useNotes from "../hooks/useNotes";
 import ThemeContext from "../contexts/theme";
 import ViewContext from "../contexts/view";
 import SortContext from "../contexts/sort";
@@ -14,6 +16,9 @@ const Notes = ({ notes }) => {
   const themeContext = useContext(ThemeContext);
   const viewContext = useContext(ViewContext);
   const sortContext = useContext(SortContext);
+
+  // Hooks
+  const { deleteNote } = useNotes();
 
   return (
     <>
@@ -92,13 +97,28 @@ const Notes = ({ notes }) => {
                   <small>{item.updated}</small>
                 </Col>
                 <Col xs={2}>
-                  <Button variant="secondary" size="sm">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    as={Link}
+                    to={`/note/view/${item.id}`}
+                  >
                     Ver
                   </Button>
-                  <Button variant="secondary" size="sm" className="mx-1">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="mx-1"
+                    as={Link}
+                    to={`/note/update/${item.id}`}
+                  >
                     Editar
                   </Button>
-                  <Button variant="danger" size="sm">
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => deleteNote(item.id)}
+                  >
                     Borrar
                   </Button>
                 </Col>

@@ -20,9 +20,6 @@ const Note = () => {
       <PrivateRoute path={`${match.url}/view/:id([1-9][0-9]*)`}>
         <ViewNote />
       </PrivateRoute>
-      <PrivateRoute path={`${match.url}/delete/:id([1-9][0-9]*)`}>
-        DELETE
-      </PrivateRoute>
       <PrivateRoute path="*">
         <PageNotFound text="No se encuentra la nota" />
       </PrivateRoute>

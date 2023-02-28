@@ -18,7 +18,7 @@ import Note from "./views/Note";
 
 // Main APP
 const App = () => {
-  // Statuses
+  // States
   const [userLogged, setUserLogged] = useState(
     localStorage.getItem("logged") == "true" ? true : false
   );
