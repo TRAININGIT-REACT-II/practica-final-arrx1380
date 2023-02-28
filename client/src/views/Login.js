@@ -60,7 +60,9 @@ const Login = () => {
           Acceder
         </Button>
         <Form.Group className="mt-5">
-          ¿No estás registrado? <Link to="/register">Regístrate aquí</Link>
+          <small>
+            ¿No estás registrado? <Link to="/register">Regístrate aquí</Link>
+          </small>
         </Form.Group>
       </Form>
     </div>
