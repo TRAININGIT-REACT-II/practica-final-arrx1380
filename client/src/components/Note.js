@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import useNotes from "../hooks/useNotes";
 import ThemeContext from "../contexts/theme";
 import { THEMES } from "../constants/themes";
 import Card from "react-bootstrap/Card";
@@ -9,9 +8,6 @@ import Button from "react-bootstrap/Button";
 const Note = ({ note }) => {
   // Contexts
   const themeContext = useContext(ThemeContext);
-
-  // Hooks
-  const { deleteNote } = useNotes();
 
   return (
     <Card
@@ -70,11 +66,7 @@ const Note = ({ note }) => {
           >
             Editar
           </Button>
-          <Button
-            variant="danger"
-            size="sm"
-            onClick={() => deleteNote(note.id)}
-          >
+          <Button variant="danger" size="sm" onClick={() => {}}>
             Borrar
           </Button>
         </div>

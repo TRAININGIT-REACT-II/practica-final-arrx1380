@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store";
 import PublicRoute from "./components/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute";
 import UserContext from "./contexts/user";
@@ -27,38 +29,40 @@ const App = () => {
   const [theme, setTheme] = useState(THEMES.light);
 
   return (
-    <UserContext.Provider
-      value={{ isLogged: userLogged, update: setUserLogged }}
-    >
-      <ThemeContext.Provider value={{ current: theme, update: setTheme }}>
-        <ViewContext.Provider value={{ current: view, update: setView }}>
-          <SortContext.Provider value={{ current: sort, update: setSort }}>
-            <Router>
-              <Switch>
-                <PrivateRoute path="/" exact>
-                  <Home />
-                </PrivateRoute>
-                <PublicRoute path="/login">
-                  <Login />
-                </PublicRoute>
-                <PublicRoute path="/register">
-                  <Register />
-                </PublicRoute>
-                <PrivateRoute path="/logout">
-                  <Logout />
-                </PrivateRoute>
-                <PrivateRoute path="/note">
-                  <Note />
-                </PrivateRoute>
-                <Route path="*">
-                  <PageNotFound text="No se encuentra la página" />
-                </Route>
-              </Switch>
-            </Router>
-          </SortContext.Provider>
-        </ViewContext.Provider>
-      </ThemeContext.Provider>
-    </UserContext.Provider>
+    <Provider store={store}>
+      <UserContext.Provider
+        value={{ isLogged: userLogged, update: setUserLogged }}
+      >
+        <ThemeContext.Provider value={{ current: theme, update: setTheme }}>
+          <ViewContext.Provider value={{ current: view, update: setView }}>
+            <SortContext.Provider value={{ current: sort, update: setSort }}>
+              <Router>
+                <Switch>
+                  <PrivateRoute path="/" exact>
+                    <Home />
+                  </PrivateRoute>
+                  <PublicRoute path="/login">
+                    <Login />
+                  </PublicRoute>
+                  <PublicRoute path="/register">
+                    <Register />
+                  </PublicRoute>
+                  <PrivateRoute path="/logout">
+                    <Logout />
+                  </PrivateRoute>
+                  <PrivateRoute path="/note">
+                    <Note />
+                  </PrivateRoute>
+                  <Route path="*">
+                    <PageNotFound text="No se encuentra la página" />
+                  </Route>
+                </Switch>
+              </Router>
+            </SortContext.Provider>
+          </ViewContext.Provider>
+        </ThemeContext.Provider>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 

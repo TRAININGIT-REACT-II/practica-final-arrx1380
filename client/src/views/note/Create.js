@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { createNoteAction } from "../../actions/note";
 import ThemeContext from "../../contexts/theme";
 import { THEMES } from "../../constants/themes";
 import Content from "../../components/Content";
@@ -14,6 +16,9 @@ const CreateNote = () => {
   // Contexts
   const themeContext = useContext(ThemeContext);
 
+  // Dispatch
+  const dispatch = useDispatch();
+
   const onChange = (key) => (e) => {
     setFormState({
       ...formState,
@@ -23,8 +28,12 @@ const CreateNote = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // TODO
-    console.log(formState);
+    // TODO API
+    const id = Math.floor(Math.random() * 100000) + 1;
+    dispatch(
+      createNoteAction({ id, title: formState.title, note: formState.note })
+    );
+    setFormState({ title: "", note: "" });
   };
 
   return (

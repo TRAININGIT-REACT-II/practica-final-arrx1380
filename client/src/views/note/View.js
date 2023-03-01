@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import useNotes from "../../hooks/useNotes";
+import { useSelector } from "react-redux";
 import ThemeContext from "../../contexts/theme";
 import { THEMES } from "../../constants/themes";
 import Content from "../../components/Content";
@@ -15,9 +15,9 @@ const ViewNote = () => {
   // Contexts
   const themeContext = useContext(ThemeContext);
 
-  // Hooks
-  const { viewNote } = useNotes();
-  const note = viewNote(params.id);
+  // Selector
+  const notesSelector = useSelector((state) => state.notes);
+  const note = notesSelector.notes.filter((n) => n.id == params.id)[0];
 
   return (
     <Content>

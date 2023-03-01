@@ -1,15 +1,15 @@
+import { useSelector } from "react-redux";
 import Notes from "../components/Notes";
-import useNotes from "../hooks/useNotes";
 
 const NotesContent = () => {
-  //Hooks
-  const notes = useNotes();
+  // Selector
+  const notesSelector = useSelector((state) => state.notes);
 
   return (
     <>
-      {notes.notes.length ? (
+      {notesSelector.notes.length ? (
         <div className="p-2 pt-4">
-          <Notes notes={notes.notes} />
+          <Notes notes={notesSelector.notes} />
         </div>
       ) : (
         <div className="p-4 text-black-50">No hay notas</div>

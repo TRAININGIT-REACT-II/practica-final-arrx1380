@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import useNotes from "../../hooks/useNotes";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { updateNoteAction } from "../../actions/note";
 import ThemeContext from "../../contexts/theme";
 import { THEMES } from "../../constants/themes";
 import Content from "../../components/Content";
@@ -16,22 +18,21 @@ const UpdateNote = () => {
   // Contexts
   const themeContext = useContext(ThemeContext);
 
-  // Hooks
-  const { viewNote } = useNotes();
-  const note = viewNote(params.id);
+  // Selector
+  const notesSelector = useSelector((state) => state.notes);
+  const note = notesSelector.notes.filter((n) => n.id == params.id)[0];
+  if (!note) {
+    throw new Error("Note not found");
+  }
 
   // States
   const [formState, setFormState] = useState({
-    title: "",
-    note: "",
+    title: note.title,
+    note: note.note,
   });
 
-  // Effects
-  useEffect(() => {
-    if (typeof note != "undefined") {
-      setFormState({ title: note?.title, note: note?.note });
-    }
-  }, [note]);
+  // Dispatch
+  const dispatch = useDispatch();
 
   const onChange = (key) => (e) => {
     setFormState({
@@ -42,8 +43,14 @@ const UpdateNote = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // TODO
-    console.log(formState);
+    // TODO API
+    dispatch(
+      updateNoteAction({
+        id: note.id,
+        title: formState.title,
+        note: formState.note,
+      })
+    );
   };
 
   return (
