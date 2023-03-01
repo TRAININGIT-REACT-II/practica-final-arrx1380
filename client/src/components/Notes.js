@@ -10,7 +10,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
-const Notes = ({ notes }) => {
+const Notes = ({ notes, onDelete }) => {
   // Contexts
   const themeContext = useContext(ThemeContext);
   const viewContext = useContext(ViewContext);
@@ -110,7 +110,11 @@ const Notes = ({ notes }) => {
                   >
                     Editar
                   </Button>
-                  <Button variant="danger" size="sm" onClick={() => {}}>
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => onDelete(item.id)}
+                  >
                     Borrar
                   </Button>
                 </Col>
@@ -129,7 +133,7 @@ const Notes = ({ notes }) => {
             )
             .map((item, key) => (
               <Col key={key}>
-                <Note key={key} note={{ ...item }} />
+                <Note key={key} note={{ ...item }} onDelete={onDelete} />
               </Col>
             ))}
         </Row>

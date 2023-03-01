@@ -5,7 +5,7 @@ import { THEMES } from "../constants/themes";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
-const Note = ({ note }) => {
+const Note = ({ note, onDelete }) => {
   // Contexts
   const themeContext = useContext(ThemeContext);
 
@@ -66,7 +66,7 @@ const Note = ({ note }) => {
           >
             Editar
           </Button>
-          <Button variant="danger" size="sm" onClick={() => {}}>
+          <Button variant="danger" size="sm" onClick={() => onDelete(note.id)}>
             Borrar
           </Button>
         </div>
