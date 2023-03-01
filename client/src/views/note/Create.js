@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useContext } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import { createNoteAction } from "../../actions/note";
 import ThemeContext from "../../contexts/theme";
 import { THEMES } from "../../constants/themes";
@@ -15,6 +16,9 @@ const CreateNote = () => {
 
   // Contexts
   const themeContext = useContext(ThemeContext);
+
+  // History
+  const history = useHistory();
 
   // Dispatch
   const dispatch = useDispatch();
@@ -34,6 +38,7 @@ const CreateNote = () => {
       createNoteAction({ id, title: formState.title, note: formState.note })
     );
     setFormState({ title: "", note: "" });
+    history.push("/");
   };
 
   return (

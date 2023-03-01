@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import { updateNoteAction } from "../../actions/note";
 import ThemeContext from "../../contexts/theme";
 import { THEMES } from "../../constants/themes";
@@ -17,6 +18,9 @@ const UpdateNote = () => {
 
   // Contexts
   const themeContext = useContext(ThemeContext);
+
+  // History
+  const history = useHistory();
 
   // Selector
   const notesSelector = useSelector((state) => state.notes);
@@ -51,6 +55,7 @@ const UpdateNote = () => {
         note: formState.note,
       })
     );
+    history.push("/");
   };
 
   return (
