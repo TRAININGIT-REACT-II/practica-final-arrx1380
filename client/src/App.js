@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -21,18 +21,14 @@ import Note from "./views/Note";
 // Main APP
 const App = () => {
   // States
-  const [userLogged, setUserLogged] = useState(
-    localStorage.getItem("logged") == "true" ? true : false
-  );
+  const [user, setUser] = useState(null);
   const [view, setView] = useState(VIEWS.cards);
   const [sort, setSort] = useState(SORTS.title);
   const [theme, setTheme] = useState(THEMES.light);
 
   return (
     <Provider store={store}>
-      <UserContext.Provider
-        value={{ isLogged: userLogged, update: setUserLogged }}
-      >
+      <UserContext.Provider value={{ current: user, update: setUser }}>
         <ThemeContext.Provider value={{ current: theme, update: setTheme }}>
           <ViewContext.Provider value={{ current: view, update: setView }}>
             <SortContext.Provider value={{ current: sort, update: setSort }}>

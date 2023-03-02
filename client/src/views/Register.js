@@ -1,20 +1,46 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import UserContext from "../contexts/user";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
 import { JournalBookmark } from "react-bootstrap-icons";
+import useApi from "../hooks/useApi";
 
 const Register = () => {
   // States
   const [formState, setFormState] = useState({ username: "", password: "" });
+  const [error, setError] = useState(null);
 
   // Contexts
   const userContext = useContext(UserContext);
 
   // History
   const history = useHistory();
+
+  // Hooks
+  const registerRequest = useApi("/api/register", "", {}, false);
+
+  // Effects
+  useEffect(() => {
+    if (registerRequest.error) {
+      return setError(registerRequest.error);
+    }
+    if (registerRequest.data) {
+      if (
+        !registerRequest.data.id ||
+        !registerRequest.data.username ||
+        !registerRequest.data.token
+      ) {
+        return setError("Ha ocurrido un error");
+      }
+
+      userContext.update(registerRequest.data);
+      localStorage.setItem("user", JSON.stringify(registerRequest.data));
+      history.push("/");
+    }
+  }, [registerRequest]);
 
   const onChange = (key) => (e) => {
     setFormState({
@@ -25,19 +51,37 @@ const Register = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // TODO
-    console.log(formState);
-    userContext.update(true);
-    localStorage.setItem("logged", true);
-    history.push("/");
+
+    setError(null);
+
+    if (!formState.username) {
+      return setError("El usuario es obligatorio");
+    }
+
+    if (!formState.password) {
+      return setError("La contraseña es obligatoria");
+    }
+
+    registerRequest.updateParams({
+      method: "POST",
+      body: JSON.stringify(formState),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    registerRequest.perform();
   };
 
   return (
     <div className="w-100 d-flex justify-content-center mt-4">
       <Form className="mt-4" onSubmit={onSubmit}>
-        <div className="fs-1 mb-5">
+        <div className="fs-1 mb-4">
           <JournalBookmark /> TrainingNotes
+          <div className="fs-4 mt-4 text-secondary">Registro</div>
         </div>
+        <>{error ? <Alert variant="danger">{error}</Alert> : null}</>
         <Form.Group className="mb-3" controlId="formUser">
           <Form.Label>Usuario</Form.Label>
           <Form.Control

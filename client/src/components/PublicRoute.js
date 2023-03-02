@@ -4,13 +4,13 @@ import UserContext from "../contexts/user";
 
 const PublicRoute = ({ children, ...others }) => {
   // Contexts
-  const { isLogged } = useContext(UserContext);
+  const userContext = useContext(UserContext);
 
   return (
     <Route
       {...others}
       render={() =>
-        isLogged === false ? (
+        !userContext.current ? (
           children
         ) : (
           <Redirect

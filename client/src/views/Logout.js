@@ -11,11 +11,10 @@ const Logout = () => {
 
   // Effects
   useEffect(() => {
-    // TODO
-    localStorage.setItem("logged", false);
-    userContext.update(false);
+    localStorage.removeItem("user");
+    userContext.update(null);
     history.push("/login");
-  }, []);
+  });
 
   return <></>;
 };
