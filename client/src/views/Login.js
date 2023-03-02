@@ -81,7 +81,13 @@ const Login = () => {
           <JournalBookmark /> TrainingNotes
           <div className="fs-4 mt-4 text-secondary">Acceso</div>
         </div>
-        <>{error ? <Alert variant="danger">{error}</Alert> : null}</>
+        <>
+          {error ? (
+            <Alert variant="danger">
+              <small>{error}</small>
+            </Alert>
+          ) : null}
+        </>
         <Form.Group className="mb-3" controlId="formUser">
           <Form.Label>Usuario</Form.Label>
           <Form.Control

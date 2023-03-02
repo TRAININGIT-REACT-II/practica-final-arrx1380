@@ -1,6 +1,8 @@
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { deleteNoteAction } from "../actions/note";
+import ThemeContext from "../contexts/theme";
+import { THEMES } from "../constants/themes";
 import Notes from "../components/Notes";
 
 const NotesContent = () => {
@@ -9,6 +11,9 @@ const NotesContent = () => {
 
   // Dispatch
   const dispatch = useDispatch();
+
+  // Contexts
+  const themeContext = useContext(ThemeContext);
 
   const onDelete = (id) => {
     dispatch(deleteNoteAction(id));
@@ -21,7 +26,15 @@ const NotesContent = () => {
           <Notes notes={notesSelector.notes} onDelete={onDelete} />
         </div>
       ) : (
-        <div className="p-4 text-black-50">No hay notas</div>
+        <div
+          className={`p-4 ${
+            themeContext.current === THEMES.light
+              ? "text-black-50"
+              : "text-white-50"
+          }`}
+        >
+          No hay notas
+        </div>
       )}
     </>
   );

@@ -46,7 +46,6 @@ const useApi = (url, token = "", initialParams = {}, performOnMount = true) => {
           if (json.error != null) {
             setError(json.error);
           } else {
-            console.log(json);
             setData(json);
           }
         })

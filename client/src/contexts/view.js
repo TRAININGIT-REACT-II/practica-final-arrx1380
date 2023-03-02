@@ -2,7 +2,7 @@ import { createContext } from "react";
 import { VIEWS } from "../constants/views";
 
 const ViewContext = createContext({
-  current: localStorage.getItem("view") ?? VIEWS.list,
+  current: VIEWS.list,
   update: () => {},
 });
 
