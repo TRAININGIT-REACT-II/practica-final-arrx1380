@@ -20,7 +20,7 @@ const Register = () => {
   const history = useHistory();
 
   // Hooks
-  const registerRequest = useApi("/api/register", "", {}, false);
+  const registerRequest = useApi("/api/register");
 
   // Effects
   useEffect(() => {

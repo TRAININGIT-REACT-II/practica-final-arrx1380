@@ -82,16 +82,20 @@ const NavBar = ({ home = true }) => {
                     checked={sortContext.current === SORTS.title}
                   />
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => setSortContext(SORTS.created)}>
+                <NavDropdown.Item
+                  onClick={() => setSortContext(SORTS.createdAt)}
+                >
                   <NavDropdownItem
                     item="Fecha de creación"
-                    checked={sortContext.current === SORTS.created}
+                    checked={sortContext.current === SORTS.createdAt}
                   />
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => setSortContext(SORTS.updated)}>
+                <NavDropdown.Item
+                  onClick={() => setSortContext(SORTS.updatedAt)}
+                >
                   <NavDropdownItem
                     item="Fecha de actualización"
-                    checked={sortContext.current === SORTS.updated}
+                    checked={sortContext.current === SORTS.updatedAt}
                   />
                 </NavDropdown.Item>
               </NavDropdown>

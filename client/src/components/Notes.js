@@ -87,10 +87,10 @@ const Notes = ({ notes, onDelete }) => {
                   <b>{item.title}</b>
                 </Col>
                 <Col xs={2} className="pt-1">
-                  <small>{item.created}</small>
+                  <small>{item.createdAt}</small>
                 </Col>
                 <Col xs={2} className="pt-1">
-                  <small>{item.updated}</small>
+                  <small>{item.updatedAt}</small>
                 </Col>
                 <Col xs={2}>
                   <Button

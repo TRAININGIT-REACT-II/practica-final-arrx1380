@@ -1,27 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useContext } from "react";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { createNoteAction } from "../../actions/note";
 import ThemeContext from "../../contexts/theme";
+import UserContext from "../../contexts/user";
 import { THEMES } from "../../constants/themes";
 import Content from "../../components/Content";
 import NavBar from "../../components/NavBar";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
+import useApi from "../../hooks/useApi";
 
 const CreateNote = () => {
   // States
-  const [formState, setFormState] = useState({ title: "", note: "" });
+  const [formState, setFormState] = useState({ title: "", content: "" });
+  const [error, setError] = useState(null);
 
   // Contexts
   const themeContext = useContext(ThemeContext);
+  const userContext = useContext(UserContext);
 
   // History
   const history = useHistory();
 
-  // Dispatch
-  const dispatch = useDispatch();
+  // Hooks
+  const createNoteRequest = useApi("/api/notes", userContext.current.token);
+
+  // Effects
+  useEffect(() => {
+    if (createNoteRequest.error) {
+      return setError(createNoteRequest.error);
+    }
+    if (createNoteRequest.data) {
+      setFormState({ title: "", content: "" });
+      history.push("/");
+    }
+  }, [createNoteRequest]);
 
   const onChange = (key) => (e) => {
     setFormState({
@@ -32,13 +46,27 @@ const CreateNote = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // TODO API
-    const id = Math.floor(Math.random() * 100000) + 1;
-    dispatch(
-      createNoteAction({ id, title: formState.title, note: formState.note })
-    );
-    setFormState({ title: "", note: "" });
-    history.push("/");
+
+    setError(null);
+
+    if (!formState.title) {
+      return setError("El título es obligatorio");
+    }
+
+    if (!formState.content) {
+      return setError("La descripción es obligatoria");
+    }
+
+    createNoteRequest.updateParams({
+      method: "POST",
+      body: JSON.stringify(formState),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    createNoteRequest.perform();
   };
 
   return (
@@ -51,6 +79,13 @@ const CreateNote = () => {
       >
         <Form className="mt-2 mx-5" onSubmit={onSubmit}>
           <div className="fs-3 mb-3">Añadir nota</div>
+          <>
+            {error ? (
+              <Alert variant="danger">
+                <small>{error}</small>
+              </Alert>
+            ) : null}
+          </>
           <Form.Group className="mb-3" controlId="formTitle">
             <Form.Label>Título</Form.Label>
             <Form.Control
@@ -71,8 +106,8 @@ const CreateNote = () => {
               as="textarea"
               rows={5}
               placeholder="Nota"
-              value={formState.note}
-              onChange={onChange("note")}
+              value={formState.content}
+              onChange={onChange("content")}
               className={
                 themeContext.current === THEMES.dark
                   ? "bg-dark text-white"

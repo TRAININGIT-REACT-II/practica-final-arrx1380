@@ -14,10 +14,10 @@ const Note = () => {
       <PrivateRoute path={`${match.url}/create`}>
         <CreateNote />
       </PrivateRoute>
-      <PrivateRoute path={`${match.url}/update/:id([1-9][0-9]*)`}>
+      <PrivateRoute path={`${match.url}/update/:id`}>
         <UpdateNote />
       </PrivateRoute>
-      <PrivateRoute path={`${match.url}/view/:id([1-9][0-9]*)`}>
+      <PrivateRoute path={`${match.url}/view/:id`}>
         <ViewNote />
       </PrivateRoute>
       <PrivateRoute path="*">

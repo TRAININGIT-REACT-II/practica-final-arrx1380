@@ -1,42 +1,50 @@
-import { useState } from "react";
-import { useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { updateNoteAction } from "../../actions/note";
 import ThemeContext from "../../contexts/theme";
+import UserContext from "../../contexts/user";
 import { THEMES } from "../../constants/themes";
 import Content from "../../components/Content";
 import NavBar from "../../components/NavBar";
 import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 import Form from "react-bootstrap/Form";
+import useApi from "../../hooks/useApi";
 
 const UpdateNote = () => {
+  // States
+  const [error, setError] = useState(null);
+  const [note, setNote] = useState({});
+  const [formState, setFormState] = useState({
+    title: "",
+    content: "",
+  });
+
   // Params
   const params = useParams();
 
   // Contexts
   const themeContext = useContext(ThemeContext);
+  const userContext = useContext(UserContext);
 
   // History
   const history = useHistory();
 
-  // Selectors
-  const notesSelector = useSelector((state) => state.notes);
-  const note = notesSelector.notes.filter((n) => n.id == params.id)[0];
-  if (!note) {
-    throw new Error("Note not found");
-  }
+  // Hooks
+  const updateNoteRequest = useApi(
+    `/api/notes/${params.id}`,
+    userContext.current.token
+  );
 
-  // States
-  const [formState, setFormState] = useState({
-    title: note.title,
-    note: note.note,
-  });
-
-  // Dispatch
-  const dispatch = useDispatch();
+  // Effects
+  useEffect(() => {
+    if (updateNoteRequest.error) {
+      return setError(updateNoteRequest.error);
+    }
+    if (updateNoteRequest.data) {
+      history.push("/");
+    }
+  }, [updateNoteRequest]);
 
   const onChange = (key) => (e) => {
     setFormState({
@@ -47,15 +55,27 @@ const UpdateNote = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // TODO API
-    dispatch(
-      updateNoteAction({
-        id: note.id,
-        title: formState.title,
-        note: formState.note,
-      })
-    );
-    history.push("/");
+
+    setError(null);
+
+    if (!formState.title) {
+      return setError("El título es obligatorio");
+    }
+
+    if (!formState.content) {
+      return setError("La descripción es obligatoria");
+    }
+
+    updateNoteRequest.updateParams({
+      method: "PUT",
+      body: JSON.stringify(formState),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    updateNoteRequest.perform();
   };
 
   return (
@@ -68,6 +88,13 @@ const UpdateNote = () => {
       >
         <Form className="mt-2 mx-5" onSubmit={onSubmit}>
           <div className="fs-3 mb-3">Editar nota</div>
+          <>
+            {error ? (
+              <Alert variant="danger">
+                <small>{error}</small>
+              </Alert>
+            ) : null}
+          </>
           <Form.Group className="mb-3" controlId="formTitle">
             <Form.Label>Título</Form.Label>
             <Form.Control
@@ -88,8 +115,8 @@ const UpdateNote = () => {
               as="textarea"
               rows={5}
               placeholder="Nota"
-              value={formState?.note}
-              onChange={onChange("note")}
+              value={formState?.content}
+              onChange={onChange("content")}
               className={
                 themeContext.current === THEMES.dark
                   ? "bg-dark text-white"

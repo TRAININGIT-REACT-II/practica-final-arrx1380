@@ -1,11 +1,11 @@
 import { useMemo, useEffect, useState } from "react";
 
-const useApi = (url, token = "", initialParams = {}, performOnMount = true) => {
-  const [loading, setLoading] = useState(performOnMount);
+const useApi = (url, token = "") => {
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [fetchParams, setFetchParams] = useState(initialParams);
-  const [performRequest, setPerformRequest] = useState(performOnMount);
+  const [fetchParams, setFetchParams] = useState({});
+  const [performRequest, setPerformRequest] = useState(false);
 
   const updateParams = (newParams) => {
     setFetchParams(newParams);

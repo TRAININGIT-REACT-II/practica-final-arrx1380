@@ -20,7 +20,7 @@ const Login = () => {
   const history = useHistory();
 
   // Hooks
-  const loginRequest = useApi("/api/login", "", {}, false);
+  const loginRequest = useApi("/api/login");
 
   // Effects
   useEffect(() => {
