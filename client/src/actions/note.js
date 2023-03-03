@@ -23,3 +23,7 @@ export const deleteNoteAction = (id) => ({
   type: types.DELETE_NOTE,
   id,
 });
+
+export const clearNotesAction = () => ({
+  type: types.CLEAR_NOTES,
+});

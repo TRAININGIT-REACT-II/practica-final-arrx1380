@@ -27,6 +27,10 @@ const reducer = (state = initialState, action) => {
       return {
         notes: [...state.notes.filter((n) => n.id != action.id)],
       };
+    case types.CLEAR_NOTES:
+      return {
+        notes: [],
+      };
     default:
       return state;
   }

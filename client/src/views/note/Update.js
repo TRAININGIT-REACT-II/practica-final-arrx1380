@@ -22,7 +22,7 @@ const UpdateNote = () => {
   // History
   const history = useHistory();
 
-  // Selector
+  // Selectors
   const notesSelector = useSelector((state) => state.notes);
   const note = notesSelector.notes.filter((n) => n.id == params.id)[0];
   if (!note) {

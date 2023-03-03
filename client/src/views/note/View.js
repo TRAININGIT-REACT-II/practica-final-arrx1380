@@ -15,7 +15,7 @@ const ViewNote = () => {
   // Contexts
   const themeContext = useContext(ThemeContext);
 
-  // Selector
+  // Selectors
   const notesSelector = useSelector((state) => state.notes);
   const note = notesSelector.notes.filter((n) => n.id == params.id)[0];
 

@@ -6,7 +6,7 @@ import { THEMES } from "../constants/themes";
 import Notes from "../components/Notes";
 
 const NotesContent = () => {
-  // Selector
+  // Selectors
   const notesSelector = useSelector((state) => state.notes);
 
   // Dispatch

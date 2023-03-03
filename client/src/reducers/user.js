@@ -8,6 +8,10 @@ const reducer = (state = initialState, action) => {
       return {
         name: action.name,
       };
+    case types.CLEAR_USER:
+      return {
+        name: [],
+      };
     default:
       return state;
   }
