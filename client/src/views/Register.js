@@ -40,7 +40,7 @@ const Register = () => {
       localStorage.setItem("user", JSON.stringify(registerRequest.data));
       history.push("/");
     }
-  }, [registerRequest]);
+  }, [registerRequest.data]);
 
   const onChange = (key) => (e) => {
     setFormState({

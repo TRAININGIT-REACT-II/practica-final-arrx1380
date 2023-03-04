@@ -40,7 +40,7 @@ const Login = () => {
       userContext.update(loginRequest.data);
       history.push("/");
     }
-  }, [loginRequest]);
+  }, [loginRequest.data]);
 
   const onChange = (key) => (e) => {
     setFormState({

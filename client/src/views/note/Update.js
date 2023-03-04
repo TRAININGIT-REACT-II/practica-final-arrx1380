@@ -14,7 +14,6 @@ import useApi from "../../hooks/useApi";
 const UpdateNote = () => {
   // States
   const [error, setError] = useState(null);
-  const [note, setNote] = useState({});
   const [formState, setFormState] = useState({
     title: "",
     content: "",
@@ -31,6 +30,10 @@ const UpdateNote = () => {
   const history = useHistory();
 
   // Hooks
+  const viewNoteRequest = useApi(
+    `/api/notes/${params.id}`,
+    userContext.current.token
+  );
   const updateNoteRequest = useApi(
     `/api/notes/${params.id}`,
     userContext.current.token
@@ -38,13 +41,30 @@ const UpdateNote = () => {
 
   // Effects
   useEffect(() => {
+    viewNoteRequest.updateParams({
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    viewNoteRequest.perform();
+  }, []);
+
+  useEffect(() => {
+    if (viewNoteRequest.data) {
+      setFormState(viewNoteRequest.data);
+    }
+  }, [viewNoteRequest.data]);
+
+  useEffect(() => {
     if (updateNoteRequest.error) {
       return setError(updateNoteRequest.error);
     }
     if (updateNoteRequest.data) {
       history.push("/");
     }
-  }, [updateNoteRequest]);
+  }, [updateNoteRequest.data]);
 
   const onChange = (key) => (e) => {
     setFormState({

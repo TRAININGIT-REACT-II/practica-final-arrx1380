@@ -39,10 +39,6 @@ const NotesContent = () => {
     }
   }, [getNotesRequest]);
 
-  useEffect(() => {
-    getNotesRequest.perform();
-  }, [deleteNoteRequest]);
-
   const onDelete = (id) => {
     setNoteId(id);
 

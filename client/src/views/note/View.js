@@ -42,7 +42,7 @@ const ViewNote = () => {
     if (viewNoteRequest.data) {
       setNote(viewNoteRequest.data);
     }
-  }, [viewNoteRequest]);
+  }, [viewNoteRequest.data]);
 
   return (
     <Content>

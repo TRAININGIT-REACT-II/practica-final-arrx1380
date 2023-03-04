@@ -35,7 +35,7 @@ const CreateNote = () => {
       setFormState({ title: "", content: "" });
       history.push("/");
     }
-  }, [createNoteRequest]);
+  }, [createNoteRequest.data]);
 
   const onChange = (key) => (e) => {
     setFormState({
