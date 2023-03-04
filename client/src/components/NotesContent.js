@@ -37,7 +37,18 @@ const NotesContent = () => {
     if (getNotesRequest.data) {
       setNotes(getNotesRequest.data);
     }
-  }, [getNotesRequest]);
+  }, [getNotesRequest.data]);
+
+  useEffect(() => {
+    getNotesRequest.updateParams({
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    getNotesRequest.perform();
+  }, [deleteNoteRequest.data]);
 
   const onDelete = (id) => {
     setNoteId(id);
