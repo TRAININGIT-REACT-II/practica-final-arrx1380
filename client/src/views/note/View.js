@@ -39,10 +39,13 @@ const ViewNote = () => {
   }, []);
 
   useEffect(() => {
+    if (viewNoteRequest.error) {
+      throw new Error(viewNoteRequest.error);
+    }
     if (viewNoteRequest.data) {
       setNote(viewNoteRequest.data);
     }
-  }, [viewNoteRequest.data]);
+  }, [viewNoteRequest.data, viewNoteRequest.error]);
 
   return (
     <Content>

@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 import PublicRoute from "./components/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute";
+import ErrorBoundary from "./components/ErrorBoundary";
 import UserContext from "./contexts/user";
 import ViewContext from "./contexts/view";
 import SortContext from "./contexts/sort";
@@ -35,19 +36,29 @@ const App = () => {
               <Router>
                 <Switch>
                   <PrivateRoute path="/" exact>
-                    <Home />
+                    <ErrorBoundary message="Ha ocurrido un error mostrando las notas">
+                      <Home />
+                    </ErrorBoundary>
                   </PrivateRoute>
                   <PublicRoute path="/login">
-                    <Login />
+                    <ErrorBoundary message="Ha ocurrido un error en el acceso">
+                      <Login />
+                    </ErrorBoundary>
                   </PublicRoute>
                   <PublicRoute path="/register">
-                    <Register />
+                    <ErrorBoundary message="Ha ocurrido un error en el registro">
+                      <Register />
+                    </ErrorBoundary>
                   </PublicRoute>
                   <PrivateRoute path="/logout">
-                    <Logout />
+                    <ErrorBoundary message="Ha ocurrido un error cerrando la sessión">
+                      <Logout />
+                    </ErrorBoundary>
                   </PrivateRoute>
                   <PrivateRoute path="/note">
-                    <Note />
+                    <ErrorBoundary message="Ha ocurrido un error en la nota">
+                      <Note />
+                    </ErrorBoundary>
                   </PrivateRoute>
                   <Route path="*">
                     <PageNotFound text="No se encuentra la página" />
