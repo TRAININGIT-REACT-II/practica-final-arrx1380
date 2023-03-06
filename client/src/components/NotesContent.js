@@ -3,9 +3,8 @@ import ThemeContext from "../contexts/theme";
 import UserContext from "../contexts/user";
 import { THEMES } from "../constants/themes";
 import Notes from "../components/Notes";
+import CustomModal from "../components/CustomModal";
 import useApi from "../hooks/useApi";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 
 const NotesContent = () => {
   // States
@@ -71,22 +70,25 @@ const NotesContent = () => {
     setShow(true);
   };
 
+  const modalClose = () => {
+    setShow(false);
+  };
+
+  const modalConfirm = () => {
+    setConfirm(true);
+  };
+
   return (
     <>
-      <Modal show={show} onHide={() => setShow(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Borrar nota</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>¿Seguro que quieres borrar esta nota?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShow(false)}>
-            No
-          </Button>
-          <Button variant="danger" onClick={() => setConfirm(true)}>
-            Sí
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <CustomModal
+        title="Borrar nota"
+        question="¿Seguro que quieres borrar esta nota?"
+        noButton="No"
+        yesButton="Sí"
+        show={show}
+        modalClose={modalClose}
+        modalConfirm={modalConfirm}
+      />
       {notes?.length ? (
         <div className="p-2 pt-4">
           <Notes notes={notes} onDelete={onDelete} />
