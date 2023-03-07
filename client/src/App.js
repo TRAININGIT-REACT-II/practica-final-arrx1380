@@ -9,9 +9,7 @@ import UserContext from "./contexts/user";
 import ViewContext from "./contexts/view";
 import SortContext from "./contexts/sort";
 import ThemeContext from "./contexts/theme";
-import { VIEWS } from "./constants/views";
-import { SORTS } from "./constants/sorts";
-import { THEMES } from "./constants/themes";
+import useConfig from "./hooks/useConfig";
 import Home from "./views/Home";
 import Login from "./views/Login";
 import Register from "./views/Register";
@@ -23,16 +21,20 @@ import Note from "./views/Note";
 const App = () => {
   // States
   const [user, setUser] = useState(null);
-  const [view, setView] = useState(VIEWS.cards);
-  const [sort, setSort] = useState(SORTS.title);
-  const [theme, setTheme] = useState(THEMES.light);
+  const config = useConfig();
 
   return (
     <Provider store={store}>
       <UserContext.Provider value={{ current: user, update: setUser }}>
-        <ThemeContext.Provider value={{ current: theme, update: setTheme }}>
-          <ViewContext.Provider value={{ current: view, update: setView }}>
-            <SortContext.Provider value={{ current: sort, update: setSort }}>
+        <ThemeContext.Provider
+          value={{ current: config.theme, update: config.setTheme }}
+        >
+          <ViewContext.Provider
+            value={{ current: config.view, update: config.setView }}
+          >
+            <SortContext.Provider
+              value={{ current: config.sort, update: config.setSort }}
+            >
               <Router>
                 <Switch>
                   <PrivateRoute path="/" exact>
