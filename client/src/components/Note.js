@@ -28,7 +28,7 @@ const Note = ({ note, onDelete }) => {
             >
               Creación:
             </b>{" "}
-            {note.createdAt}
+            <span>{note.createdAt}</span>
             <br />
             <b
               className={
@@ -39,7 +39,7 @@ const Note = ({ note, onDelete }) => {
             >
               Modificación:
             </b>{" "}
-            {note.updatedAt}
+            <span>{note.updatedAt}</span>
           </small>
         </Card.Text>
       </Card.Body>
