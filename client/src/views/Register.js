@@ -1,5 +1,6 @@
-import { useState, useContext, useEffect } from "react";
-import UserContext from "../contexts/user";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateUserAction } from "../actions/user";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import Button from "react-bootstrap/Button";
@@ -13,14 +14,14 @@ const Register = () => {
   const [formState, setFormState] = useState({ username: "", password: "" });
   const [error, setError] = useState(null);
 
-  // Contexts
-  const userContext = useContext(UserContext);
-
   // History
   const history = useHistory();
 
   // Hooks
   const registerRequest = useApi("/api/register");
+
+  // Dispatch
+  const dispatch = useDispatch();
 
   // Effects
   useEffect(() => {
@@ -36,8 +37,7 @@ const Register = () => {
         return setError("Ha ocurrido un error");
       }
 
-      userContext.update(registerRequest.data);
-      localStorage.setItem("user", JSON.stringify(registerRequest.data));
+      dispatch(updateUserAction(registerRequest.data));
       history.push("/");
     }
   }, [registerRequest.data, registerRequest.error]);

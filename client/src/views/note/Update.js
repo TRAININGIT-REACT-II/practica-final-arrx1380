@@ -1,8 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
 import ThemeContext from "../../contexts/theme";
-import UserContext from "../../contexts/user";
 import { THEMES } from "../../constants/themes";
 import Content from "../../components/Content";
 import NavBar from "../../components/NavBar";
@@ -24,20 +24,16 @@ const UpdateNote = () => {
 
   // Contexts
   const themeContext = useContext(ThemeContext);
-  const userContext = useContext(UserContext);
+
+  // Selectors
+  const user = useSelector((state) => state.user);
 
   // History
   const history = useHistory();
 
   // Hooks
-  const viewNoteRequest = useApi(
-    `/api/notes/${params.id}`,
-    userContext.current.token
-  );
-  const updateNoteRequest = useApi(
-    `/api/notes/${params.id}`,
-    userContext.current.token
-  );
+  const viewNoteRequest = useApi(`/api/notes/${params.id}`, user.token);
+  const updateNoteRequest = useApi(`/api/notes/${params.id}`, user.token);
 
   // Effects
   useEffect(() => {

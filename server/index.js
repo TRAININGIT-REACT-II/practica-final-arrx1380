@@ -249,7 +249,7 @@ fastify.route({
       title,
       content,
       createdAt: date,
-      updatedAt: date
+      updatedAt: date,
     };
   },
 });

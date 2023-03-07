@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import ThemeContext from "../contexts/theme";
-import UserContext from "../contexts/user";
+import { useSelector } from "react-redux";
 import { THEMES } from "../constants/themes";
 import Notes from "../components/Notes";
 import CustomModal from "../components/CustomModal";
@@ -15,14 +15,13 @@ const NotesContent = () => {
 
   // Contexts
   const themeContext = useContext(ThemeContext);
-  const userContext = useContext(UserContext);
+
+  // Selectors
+  const user = useSelector((state) => state.user);
 
   // Hooks
-  const getNotesRequest = useApi("/api/notes", userContext.current.token);
-  const deleteNoteRequest = useApi(
-    `/api/notes/${noteId}`,
-    userContext.current.token
-  );
+  const getNotesRequest = useApi("/api/notes", user.token);
+  const deleteNoteRequest = useApi(`/api/notes/${noteId}`, user.token);
 
   // Effects
   useEffect(() => {

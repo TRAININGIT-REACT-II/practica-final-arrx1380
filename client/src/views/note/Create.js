@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
 import ThemeContext from "../../contexts/theme";
-import UserContext from "../../contexts/user";
 import { THEMES } from "../../constants/themes";
 import Content from "../../components/Content";
 import NavBar from "../../components/NavBar";
@@ -18,13 +18,15 @@ const CreateNote = () => {
 
   // Contexts
   const themeContext = useContext(ThemeContext);
-  const userContext = useContext(UserContext);
+
+  // Selectors
+  const user = useSelector((state) => state.user);
 
   // History
   const history = useHistory();
 
   // Hooks
-  const createNoteRequest = useApi("/api/notes", userContext.current.token);
+  const createNoteRequest = useApi("/api/notes", user.token);
 
   // Effects
   useEffect(() => {

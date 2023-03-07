@@ -1,17 +1,15 @@
 import types from "../actions/types";
 
-const initialState = { name: "" };
+const initialState = {};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.UPDATE_USER:
-      return {
-        name: action.name,
-      };
+      localStorage.setItem("user", JSON.stringify(action.user));
+      return action;
     case types.CLEAR_USER:
-      return {
-        name: [],
-      };
+      localStorage.removeItem("user");
+      return {};
     default:
       return state;
   }

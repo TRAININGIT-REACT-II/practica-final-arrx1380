@@ -1,5 +1,6 @@
-import { useState, useContext, useEffect } from "react";
-import UserContext from "../contexts/user";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateUserAction } from "../actions/user";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import Button from "react-bootstrap/Button";
@@ -13,14 +14,14 @@ const Login = () => {
   const [formState, setFormState] = useState({ username: "", password: "" });
   const [error, setError] = useState(null);
 
-  // Contexts
-  const userContext = useContext(UserContext);
-
   // History
   const history = useHistory();
 
   // Hooks
   const loginRequest = useApi("/api/login");
+
+  // Dispatch
+  const dispatch = useDispatch();
 
   // Effects
   useEffect(() => {
@@ -36,8 +37,7 @@ const Login = () => {
         return setError("Ha ocurrido un error");
       }
 
-      localStorage.setItem("user", JSON.stringify(loginRequest.data));
-      userContext.update(loginRequest.data);
+      dispatch(updateUserAction(loginRequest.data));
       history.push("/");
     }
   }, [loginRequest.data, loginRequest.error]);

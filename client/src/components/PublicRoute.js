@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import UserContext from "../contexts/user";
+import { useSelector } from "react-redux";
 
 const PublicRoute = ({ children, ...others }) => {
-  // Contexts
-  const userContext = useContext(UserContext);
+  // Selectors
+  const user = useSelector((state) => state.user);
 
   return (
     <Route
       {...others}
       render={() =>
-        !userContext.current ? (
+        !user ? (
           children
         ) : (
           <Redirect
