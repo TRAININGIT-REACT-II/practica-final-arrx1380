@@ -11,7 +11,6 @@ const NotesContent = () => {
   const [notes, setNotes] = useState([]);
   const [noteId, setNoteId] = useState("");
   const [show, setShow] = useState(false);
-  const [confirm, setConfirm] = useState(false);
 
   // Contexts
   const themeContext = useContext(ThemeContext);
@@ -38,18 +37,12 @@ const NotesContent = () => {
     if (getNotesRequest.error) {
       throw new Error(getNotesRequest);
     }
-    if (getNotesRequest.data) {
-      setNotes(getNotesRequest.data);
-    }
-  }, [getNotesRequest.data, getNotesRequest.error]);
+    setNotes(getNotesRequest.data);
+  }, [getNotesRequest.data]);
 
   useEffect(() => {
-    if (confirm) {
-      deleteNoteRequest.updateParams({
-        method: "DELETE",
-      });
-
-      deleteNoteRequest.perform();
+    if (deleteNoteRequest.data) {
+      setShow(false);
 
       getNotesRequest.updateParams({
         headers: {
@@ -58,11 +51,8 @@ const NotesContent = () => {
       });
 
       getNotesRequest.perform();
-
-      setConfirm(false);
-      setShow(false);
     }
-  }, [confirm]);
+  }, [deleteNoteRequest.data]);
 
   const onDelete = (id) => {
     setNoteId(id);
@@ -74,7 +64,11 @@ const NotesContent = () => {
   };
 
   const modalConfirm = () => {
-    setConfirm(true);
+    deleteNoteRequest.updateParams({
+      method: "DELETE",
+    });
+
+    deleteNoteRequest.perform();
   };
 
   return (
