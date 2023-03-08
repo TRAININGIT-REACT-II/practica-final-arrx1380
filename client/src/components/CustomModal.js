@@ -25,16 +25,16 @@ const CustomModal = ({
 
   if (show && modalRef.current != null) {
     return createPortal(
-      <Modal show={show} onHide={modalClose}>
+      <Modal show={show} onHide={() => modalClose()}>
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{question}</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={modalClose}>
+          <Button variant="secondary" onClick={() => modalClose()}>
             {noButton}
           </Button>
-          <Button variant="danger" onClick={modalConfirm}>
+          <Button variant="danger" onClick={() => modalConfirm()}>
             {yesButton}
           </Button>
         </Modal.Footer>

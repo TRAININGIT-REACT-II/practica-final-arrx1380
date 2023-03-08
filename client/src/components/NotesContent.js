@@ -34,29 +34,21 @@ const NotesContent = () => {
   }, []);
 
   useEffect(() => {
-    if (getNotesRequest.error) {
-      throw new Error(getNotesRequest);
+    if (getNotesRequest.data) {
+      setNotes(getNotesRequest.data);
     }
-    setNotes(getNotesRequest.data);
   }, [getNotesRequest.data]);
 
   useEffect(() => {
     if (deleteNoteRequest.data) {
+      setNotes(notes.filter((n) => n.id != noteId));
       setShow(false);
-
-      getNotesRequest.updateParams({
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      getNotesRequest.perform();
     }
   }, [deleteNoteRequest.data]);
 
   const onDelete = (id) => {
-    setNoteId(id);
     setShow(true);
+    setNoteId(id);
   };
 
   const modalClose = () => {
@@ -79,9 +71,10 @@ const NotesContent = () => {
         noButton="No"
         yesButton="Sí"
         show={show}
-        modalClose={modalClose}
-        modalConfirm={modalConfirm}
+        modalClose={() => modalClose()}
+        modalConfirm={() => modalConfirm()}
       />
+
       {notes?.length ? (
         <div className="p-2 pt-4">
           <Notes notes={notes} onDelete={onDelete} />
