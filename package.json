@@ -7,7 +7,7 @@
     "start": "concurrently npm:client npm:server",
     "client": "webpack serve --mode development --config ./client/webpack.config.js",
     "server": "nodemon -w server server/index.js",
-    "test": "jest",
+    "tests": "jest",
     "webpack-dev": "npx webpack -c ./client/webpack.config.js",
     "webpack-pro": "npx webpack --mode=production -c ./client/webpack.config.js"
 
