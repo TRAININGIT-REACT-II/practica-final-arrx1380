@@ -9,7 +9,7 @@ const reducer = (state = initialState, action) => {
       return action;
     case types.CLEAR_USER:
       localStorage.removeItem("user");
-      return {};
+      return initialState;
     default:
       return state;
   }

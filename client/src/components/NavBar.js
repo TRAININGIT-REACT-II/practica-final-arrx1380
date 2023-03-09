@@ -26,15 +26,34 @@ const NavBar = ({ home = true }) => {
   // History
   const history = useHistory();
 
+  const addConfigToUser = (key, value) => {
+    const user = localStorage.getItem("user");
+    let userParsed = JSON.parse(user);
+
+    if (!userParsed.config) {
+      userParsed["config"] = {
+        view: viewContext.current,
+        sort: sortContext.current,
+        theme: themeContext.current,
+      };
+    }
+
+    userParsed["config"][key] = value;
+    localStorage.setItem("user", JSON.stringify(userParsed));
+  };
+
   // Setters
   const setViewContext = (ctx) => {
     viewContext.update(ctx);
+    addConfigToUser("view", ctx);
   };
   const setSortContext = (ctx) => {
     sortContext.update(ctx);
+    addConfigToUser("sort", ctx);
   };
   const setThemeContext = (ctx) => {
     themeContext.update(ctx);
+    addConfigToUser("theme", ctx);
   };
 
   const modalClose = () => {
@@ -62,7 +81,7 @@ const NavBar = ({ home = true }) => {
         variant={`${themeContext.current}`}
         bg={`${themeContext.current}`}
         expand="lg"
-        className="px-3"
+        className="px-3 border-bottom"
       >
         <Navbar.Brand>
           <Nav.Link className="px-3" as={Link} to="/">

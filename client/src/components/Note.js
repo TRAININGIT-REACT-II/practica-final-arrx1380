@@ -11,7 +11,7 @@ const Note = ({ note, onDelete }) => {
 
   return (
     <Card
-      className="mb-3"
+      className="mb-3 border"
       bg={themeContext.current}
       text={themeContext.current === THEMES.light ? THEMES.dark : THEMES.light}
     >
@@ -43,7 +43,7 @@ const Note = ({ note, onDelete }) => {
           </small>
         </Card.Text>
       </Card.Body>
-      <Card.Footer className="text-muted">
+      <Card.Footer className="text-muted border-top">
         <div className="d-flex bd-highlight">
           <Button
             variant={
