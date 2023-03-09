@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateUserAction } from "../actions/user";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
@@ -13,9 +12,6 @@ const Login = () => {
   // States
   const [formState, setFormState] = useState({ username: "", password: "" });
   const [error, setError] = useState(null);
-
-  // History
-  const history = useHistory();
 
   // Hooks
   const loginRequest = useApi("/api/login");
@@ -38,7 +34,6 @@ const Login = () => {
       }
 
       dispatch(updateUserAction(loginRequest.data));
-      history.push("/");
     }
   }, [loginRequest.data, loginRequest.error]);
 
