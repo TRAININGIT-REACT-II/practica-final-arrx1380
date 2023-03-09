@@ -13,8 +13,8 @@ const Logout = () => {
   // Effects
   useEffect(() => {
     dispatch(clearUserAction());
-    history.push("/login");
-  });
+    // history.push("/login");
+  }, []);
 
   return <></>;
 };

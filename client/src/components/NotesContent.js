@@ -10,7 +10,7 @@ const NotesContent = () => {
   // States
   const [notes, setNotes] = useState([]);
   const [noteId, setNoteId] = useState("");
-  const [show, setShow] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   // Contexts
   const themeContext = useContext(ThemeContext);
@@ -42,17 +42,17 @@ const NotesContent = () => {
   useEffect(() => {
     if (deleteNoteRequest.data) {
       setNotes(notes.filter((n) => n.id != noteId));
-      setShow(false);
+      setShowModal(false);
     }
   }, [deleteNoteRequest.data]);
 
   const onDelete = (id) => {
-    setShow(true);
+    setShowModal(true);
     setNoteId(id);
   };
 
   const modalClose = () => {
-    setShow(false);
+    setShowModal(false);
   };
 
   const modalConfirm = () => {
@@ -70,7 +70,7 @@ const NotesContent = () => {
         question="¿Seguro que quieres borrar esta nota?"
         noButton="No"
         yesButton="Sí"
-        show={show}
+        show={showModal}
         modalClose={() => modalClose()}
         modalConfirm={() => modalConfirm()}
       />
