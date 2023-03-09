@@ -21,6 +21,12 @@ const Login = () => {
 
   // Effects
   useEffect(() => {
+    if (localStorage.getItem("user")) {
+      dispatch(updateUserAction(JSON.parse(localStorage.getItem("user"))));
+    }
+  }, []);
+
+  useEffect(() => {
     if (loginRequest.error) {
       return setError(loginRequest.error);
     }
