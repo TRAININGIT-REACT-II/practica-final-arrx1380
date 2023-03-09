@@ -33,6 +33,12 @@ const useApi = (url, token = "") => {
   }, [url, token, fetchParams]);
 
   useEffect(() => {
+    if (!loading) {
+      setPerformRequest(false);
+    }
+  }, [loading]);
+
+  useEffect(() => {
     if (performRequest) {
       if (!loading) {
         setLoading(true);
