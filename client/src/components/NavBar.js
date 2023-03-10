@@ -77,6 +77,9 @@ const NavBar = ({ home = true }) => {
         modalConfirm={() => modalConfirm()}
       />
 
+      {sortContext.current}
+      <br></br>
+
       <Navbar
         variant={`${themeContext.current}`}
         bg={`${themeContext.current}`}

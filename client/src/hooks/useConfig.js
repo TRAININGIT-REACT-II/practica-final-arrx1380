@@ -5,9 +5,9 @@ import { THEMES } from "../constants/themes";
 
 const useConfig = () => {
   // States
-  const [view, setView] = useState(VIEWS.cards);
-  const [sort, setSort] = useState(SORTS.title);
-  const [theme, setTheme] = useState(THEMES.light);
+  const [view, setView] = useState(VIEWS.default);
+  const [sort, setSort] = useState(SORTS.default);
+  const [theme, setTheme] = useState(THEMES.default);
 
   return {
     view,
