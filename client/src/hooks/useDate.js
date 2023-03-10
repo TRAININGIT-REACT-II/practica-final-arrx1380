@@ -2,7 +2,11 @@ import { format } from "date-fns";
 
 const useDate = () => {
   const parse = (d) => {
-    return format(Date.parse(d), "yyyy-MM-dd HH:mm:ss");
+    try {
+      return format(Date.parse(d), "yyyy-MM-dd HH:mm:ss");
+    } catch (e) {
+      return d;
+    }
   };
 
   return {
