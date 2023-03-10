@@ -31,21 +31,21 @@ const Login = () => {
 
   // Effects
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    const userLS = localStorage.getItem("user");
 
-    if (user) {
-      dispatch(updateUserAction(JSON.parse(user)));
+    if (userLS) {
+      dispatch(updateUserAction(JSON.parse(userLS)));
 
-      const userParsed = JSON.parse(user);
+      const userParsedLS = JSON.parse(userLS);
 
-      if (userParsed?.["config"]?.["view"]) {
-        viewContext.update(userParsed?.["config"]?.["view"]);
+      if (userParsedLS?.["config"]?.["view"]) {
+        viewContext.update(userParsedLS?.["config"]?.["view"]);
       }
-      if (userParsed?.["config"]?.["sort"]) {
-        sortContext.update(userParsed?.["config"]?.["sort"]);
+      if (userParsedLS?.["config"]?.["sort"]) {
+        sortContext.update(userParsedLS?.["config"]?.["sort"]);
       }
-      if (userParsed?.["config"]?.["theme"]) {
-        themeContext.update(userParsed?.["config"]?.["theme"]);
+      if (userParsedLS?.["config"]?.["theme"]) {
+        themeContext.update(userParsedLS?.["config"]?.["theme"]);
       }
     } else {
       setLoading(false);

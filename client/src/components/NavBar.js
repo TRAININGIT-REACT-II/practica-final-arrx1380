@@ -4,6 +4,7 @@ import CustomModal from "../components/CustomModal";
 import ViewContext from "../contexts/view";
 import SortContext from "../contexts/sort";
 import ThemeContext from "../contexts/theme";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { VIEWS } from "../constants/views";
 import { SORTS } from "../constants/sorts";
@@ -23,23 +24,26 @@ const NavBar = ({ home = true }) => {
   const sortContext = useContext(SortContext);
   const themeContext = useContext(ThemeContext);
 
+  // Selectors
+  const user = useSelector((state) => state.user);
+
   // History
   const history = useHistory();
 
   const addConfigToUser = (key, value) => {
-    const user = localStorage.getItem("user");
-    let userParsed = JSON.parse(user);
+    const userLS = localStorage.getItem("user");
+    let userParsedLS = JSON.parse(userLS);
 
-    if (!userParsed.config) {
-      userParsed["config"] = {
+    if (!userParsedLS.config) {
+      userParsedLS["config"] = {
         view: viewContext.current,
         sort: sortContext.current,
         theme: themeContext.current,
       };
     }
 
-    userParsed["config"][key] = value;
-    localStorage.setItem("user", JSON.stringify(userParsed));
+    userParsedLS["config"][key] = value;
+    localStorage.setItem("user", JSON.stringify(userParsedLS));
   };
 
   // Setters
@@ -91,15 +95,24 @@ const NavBar = ({ home = true }) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            {home ? (
-              <Nav.Link className="px-3" as={Link} to="/note/create">
-                Añadir nota
-              </Nav.Link>
-            ) : null}
+            <span
+              className={`mt-1 ${
+                themeContext.current === THEMES.dark ? "text-white" : null
+              }`}
+            >
+              Usuario: <b>{user.username}</b>
+            </span>
           </Nav>
           <Nav>
             {home ? (
               <>
+                <Nav.Link
+                  className="px-3 border-end"
+                  as={Link}
+                  to="/note/create"
+                >
+                  <span className="mx-3">Añadir nota</span>
+                </Nav.Link>
                 <NavDropdown
                   title="Vista"
                   id="view-nav-dropdown"
@@ -175,7 +188,11 @@ const NavBar = ({ home = true }) => {
               </>
             ) : null}
 
-            <NavDropdown title="Tema" id="theme-nav-dropdown" className="px-3">
+            <NavDropdown
+              title="Tema"
+              id="theme-nav-dropdown"
+              className="px-3 border-end"
+            >
               <NavDropdown.Item onClick={() => setThemeContext(THEMES.light)}>
                 <NavDropdownItem
                   item="Claro"
@@ -191,11 +208,11 @@ const NavBar = ({ home = true }) => {
             </NavDropdown>
 
             {home ? (
-              <Nav.Link className="px-3" onClick={() => setShowModal(true)}>
+              <Nav.Link className="px-4" onClick={() => setShowModal(true)}>
                 Salir
               </Nav.Link>
             ) : (
-              <Nav.Link className="px-3" as={Link} to="/">
+              <Nav.Link className="px-4" as={Link} to="/">
                 Volver
               </Nav.Link>
             )}
