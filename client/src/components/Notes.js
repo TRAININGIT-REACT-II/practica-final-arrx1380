@@ -5,6 +5,7 @@ import ViewContext from "../contexts/view";
 import SortContext from "../contexts/sort";
 import { THEMES } from "../constants/themes";
 import { VIEWS } from "../constants/views";
+import useDate from "../hooks/useDate";
 import Note from "./Note";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -15,6 +16,9 @@ const Notes = ({ notes, onDelete }) => {
   const themeContext = useContext(ThemeContext);
   const viewContext = useContext(ViewContext);
   const sortContext = useContext(SortContext);
+
+  // Hooks
+  const date = useDate();
 
   return (
     <>
@@ -87,10 +91,10 @@ const Notes = ({ notes, onDelete }) => {
                   <b>{item.title}</b>
                 </Col>
                 <Col xs={2} className="pt-1">
-                  <small>{item.createdAt}</small>
+                  <small>{date.parse(item.createdAt)}</small>
                 </Col>
                 <Col xs={2} className="pt-1">
-                  <small>{item.updatedAt}</small>
+                  <small>{date.parse(item.updatedAt)}</small>
                 </Col>
                 <Col xs={2}>
                   <Button

@@ -2,12 +2,16 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import ThemeContext from "../contexts/theme";
 import { THEMES } from "../constants/themes";
+import useDate from "../hooks/useDate";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 const Note = ({ note, onDelete }) => {
   // Contexts
   const themeContext = useContext(ThemeContext);
+
+  // Hooks
+  const date = useDate();
 
   return (
     <Card
@@ -28,7 +32,7 @@ const Note = ({ note, onDelete }) => {
             >
               Creación:
             </b>{" "}
-            <span>{note.createdAt}</span>
+            <span>{date.parse(note.createdAt)}</span>
             <br />
             <b
               className={
@@ -39,7 +43,7 @@ const Note = ({ note, onDelete }) => {
             >
               Modificación:
             </b>{" "}
-            <span>{note.updatedAt}</span>
+            <span>{date.parse(note.updatedAt)}</span>
           </small>
         </Card.Text>
       </Card.Body>
