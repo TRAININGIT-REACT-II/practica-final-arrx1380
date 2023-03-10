@@ -106,7 +106,7 @@ const CreateNote = () => {
             <Form.Label>Nota</Form.Label>
             <Form.Control
               as="textarea"
-              rows={5}
+              rows={10}
               placeholder="Nota"
               value={formState.content}
               onChange={onChange("content")}
