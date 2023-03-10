@@ -1,6 +1,9 @@
 export const SORTS = {
-  title: "title",
-  createdAt: "createdAt",
-  updatedAt: "updatedAt",
-  default: "updatedAt",
+  titleAsc: "titleAsc",
+  titleDesc: "titleDesc",
+  createdAtAsc: "createdAtAsc",
+  createdAtDesc: "createdAtDesc",
+  updatedAtAsc: "updatedAtAsc",
+  updatedAtDesc: "updatedAtDesc",
+  default: "titleAsc",
 };

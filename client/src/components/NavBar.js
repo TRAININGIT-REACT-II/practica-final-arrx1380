@@ -123,26 +123,52 @@ const NavBar = ({ home = true }) => {
                   id="sort-nav-dropdown"
                   className="px-3"
                 >
-                  <NavDropdown.Item onClick={() => setSortContext(SORTS.title)}>
+                  <NavDropdown.Item
+                    onClick={() => setSortContext(SORTS.titleAsc)}
+                  >
                     <NavDropdownItem
-                      item="Título"
-                      checked={sortContext.current === SORTS.title}
+                      item="Título (Asc)"
+                      checked={sortContext.current === SORTS.titleAsc}
                     />
                   </NavDropdown.Item>
                   <NavDropdown.Item
-                    onClick={() => setSortContext(SORTS.createdAt)}
+                    onClick={() => setSortContext(SORTS.titleDesc)}
                   >
                     <NavDropdownItem
-                      item="Fecha de creación"
-                      checked={sortContext.current === SORTS.createdAt}
+                      item="Título (Desc)"
+                      checked={sortContext.current === SORTS.titleDesc}
                     />
                   </NavDropdown.Item>
                   <NavDropdown.Item
-                    onClick={() => setSortContext(SORTS.updatedAt)}
+                    onClick={() => setSortContext(SORTS.createdAtAsc)}
                   >
                     <NavDropdownItem
-                      item="Fecha de actualización"
-                      checked={sortContext.current === SORTS.updatedAt}
+                      item="Fecha de creación (Asc)"
+                      checked={sortContext.current === SORTS.createdAtAsc}
+                    />
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    onClick={() => setSortContext(SORTS.createdAtDesc)}
+                  >
+                    <NavDropdownItem
+                      item="Fecha de creación (Desc)"
+                      checked={sortContext.current === SORTS.createdAtDesc}
+                    />
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    onClick={() => setSortContext(SORTS.updatedAtAsc)}
+                  >
+                    <NavDropdownItem
+                      item="Fecha de actualización (Asc)"
+                      checked={sortContext.current === SORTS.updatedAtAsc}
+                    />
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    onClick={() => setSortContext(SORTS.updatedAtDesc)}
+                  >
+                    <NavDropdownItem
+                      item="Fecha de actualización (Desc)"
+                      checked={sortContext.current === SORTS.updatedAtDesc}
                     />
                   </NavDropdown.Item>
                 </NavDropdown>

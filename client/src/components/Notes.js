@@ -20,6 +20,38 @@ const Notes = ({ notes, onDelete }) => {
   // Hooks
   const date = useDate();
 
+  let notesSorted;
+  switch (sortContext.current) {
+    case "titleAsc":
+      notesSorted = notes.sort((a, b) => (a["title"] > b["title"] ? 1 : -1));
+      break;
+    case "titleDesc":
+      notesSorted = notes.sort((a, b) => (a["title"] < b["title"] ? 1 : -1));
+      break;
+    case "createdAtAsc":
+      notesSorted = notes.sort((a, b) =>
+        a["createdAt"] > b["createdAt"] ? 1 : -1
+      );
+      break;
+    case "createdAtDesc":
+      notesSorted = notes.sort((a, b) =>
+        a["createdAt"] < b["createdAt"] ? 1 : -1
+      );
+      break;
+    case "updatedAtAsc":
+      notesSorted = notes.sort((a, b) =>
+        a["updatedAt"] > b["updatedAt"] ? 1 : -1
+      );
+      break;
+    case "updatedAtDesc":
+      notesSorted = notes.sort((a, b) =>
+        a["updatedAt"] < b["updatedAt"] ? 1 : -1
+      );
+      break;
+    default:
+      notesSorted = notes;
+  }
+
   return (
     <>
       {viewContext.current === VIEWS.list ? (
@@ -74,56 +106,52 @@ const Notes = ({ notes, onDelete }) => {
               </h6>
             </Col>
           </Row>
-          {notes
-            .sort((a, b) =>
-              a[sortContext.current] > b[sortContext.current] ? 1 : -1
-            )
-            .map((item, key) => (
-              <Row
-                key={key}
-                className={`m-0 py-2 border-top ${
-                  themeContext.current === THEMES.dark
-                    ? "text-white border-light border-opacity-25"
-                    : null
-                }`}
-              >
-                <Col xs={6} className="pt-1">
-                  <b>{item.title}</b>
-                </Col>
-                <Col xs={2} className="pt-1">
-                  <small>{date.parse(item.createdAt)}</small>
-                </Col>
-                <Col xs={2} className="pt-1">
-                  <small>{date.parse(item.updatedAt)}</small>
-                </Col>
-                <Col xs={2}>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    as={Link}
-                    to={`/note/view/${item.id}`}
-                  >
-                    Ver
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    className="mx-1"
-                    as={Link}
-                    to={`/note/update/${item.id}`}
-                  >
-                    Editar
-                  </Button>
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    onClick={() => onDelete(item.id)}
-                  >
-                    Borrar
-                  </Button>
-                </Col>
-              </Row>
-            ))}
+          {notesSorted?.map((item, key) => (
+            <Row
+              key={key}
+              className={`m-0 py-2 border-top ${
+                themeContext.current === THEMES.dark
+                  ? "text-white border-light border-opacity-25"
+                  : null
+              }`}
+            >
+              <Col xs={6} className="pt-1">
+                <b>{item.title}</b>
+              </Col>
+              <Col xs={2} className="pt-1">
+                <small>{date.parse(item.createdAt)}</small>
+              </Col>
+              <Col xs={2} className="pt-1">
+                <small>{date.parse(item.updatedAt)}</small>
+              </Col>
+              <Col xs={2}>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  as={Link}
+                  to={`/note/view/${item.id}`}
+                >
+                  Ver
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="mx-1"
+                  as={Link}
+                  to={`/note/update/${item.id}`}
+                >
+                  Editar
+                </Button>
+                <Button
+                  variant="danger"
+                  size="sm"
+                  onClick={() => onDelete(item.id)}
+                >
+                  Borrar
+                </Button>
+              </Col>
+            </Row>
+          ))}
         </>
       ) : (
         <Row
@@ -131,15 +159,11 @@ const Notes = ({ notes, onDelete }) => {
             themeContext.current === THEMES.dark ? "note-dark" : null
           }`}
         >
-          {notes
-            .sort((a, b) =>
-              a[sortContext.current] > b[sortContext.current] ? 1 : -1
-            )
-            .map((item, key) => (
-              <Col key={key}>
-                <Note key={key} note={{ ...item }} onDelete={onDelete} />
-              </Col>
-            ))}
+          {notesSorted?.map((item, key) => (
+            <Col key={key}>
+              <Note key={key} note={{ ...item }} onDelete={onDelete} />
+            </Col>
+          ))}
         </Row>
       )}
     </>
