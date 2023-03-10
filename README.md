@@ -1,40 +1,42 @@
 # Práctica final del curso de React de TrainingIT
 
-## Crear una cuenta de usuario
+El proyecto incluye todo lo que se especifica tanto en las partes obligatorias como en las opcionales.
 
-## Iniciar sesión y almacenar el token de usuario de manera permanente. Puedes utilizar localStorage para ello y luego cargarlo en el estado de tu aplicación.
+### Crear una cuenta de usuario
 
-## Cerrar sesión en la aplicación y borrar cualquier dato almacenado en el navegador
+### Iniciar sesión y almacenar el token de usuario de manera permanente. Puedes utilizar localStorage para ello y luego cargarlo en el estado de tu aplicación.
 
-## Incluir un botón o desplegable para ordenar las notas alfabéticamente (título), por fecha de creación y por fecha de última edición
+### Cerrar sesión en la aplicación y borrar cualquier dato almacenado en el navegador
 
-## Incluir un botón o desplegable para mostrar las notas como una lista o como tarjetas
+### Incluir un botón o desplegable para ordenar las notas alfabéticamente (título), por fecha de creación y por fecha de última edición
 
-## Agrega el modo oscuro a tu aplicación
+### Incluir un botón o desplegable para mostrar las notas como una lista o como tarjetas
 
-## Listar todas las notas del usuario
+### Agrega el modo oscuro a tu aplicación
 
-## Crear, editar y borrar notas. La acción de borrar pedirá una confirmación en un modal.
+### Listar todas las notas del usuario
 
-## Crea tus propios hooks y utiliza los que te ofrece la librería de React.
+### Crear, editar y borrar notas. La acción de borrar pedirá una confirmación en un modal.
 
-## Controla los errores haciendo uso de Error Boundaries
+### Crea tus propios hooks y utiliza los que te ofrece la librería de React.
 
-## Muestra un modal de confirmación haciendo uso de los portales
+### Controla los errores haciendo uso de Error Boundaries
 
-## Gestión de formularios para distintas vistas de la aplicación
+### Muestra un modal de confirmación haciendo uso de los portales
 
-## Gestión de distintas rutas con react-router
+### Gestión de formularios para distintas vistas de la aplicación
 
-## Incluye un estado de Redux para gestionar los datos del usuario. Puedes cargar los datos del usuario actual desde el localStorage
+### Gestión de distintas rutas con react-router
 
-## Conecta tu aplicación con la API y autentica al usuario
+### Incluye un estado de Redux para gestionar los datos del usuario. Puedes cargar los datos del usuario actual desde el localStorage
 
-## Agrega al menos un test unitario a tu proyecto
+### Conecta tu aplicación con la API y autentica al usuario
 
-## Permite configurar la URL de la API mediante el uso de DefinePlugin
+### Agrega al menos un test unitario a tu proyecto
 
-## Configura tu aplicación para generar un source-map más adecuado en producción
+### Permite configurar la URL de la API mediante el uso de DefinePlugin
+
+### Configura tu aplicación para generar un source-map más adecuado en producción
 
 # Instalación
 
